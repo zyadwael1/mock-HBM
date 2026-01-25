@@ -1,13 +1,6 @@
-
 <template>
-    <div>
-        Login Page
-    </div>
+  <div>Login Page</div>
 </template>
-    <script setup>
-    
-    </script>
+<script setup></script>
 
-<style>
-
-</style>
+<style></style>

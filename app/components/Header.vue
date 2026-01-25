@@ -1,10 +1,6 @@
-
 <template>
-    Header
-</template>
-    <script setup lang="ts">
-    
-    </script>
-<style >
+Header
 
-</style>
+</template>
+<script setup lang="ts"></script>
+<style></style>
