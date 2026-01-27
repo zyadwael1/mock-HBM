@@ -9,7 +9,7 @@ export default {
       },
     },
     fontFamily: {
-      // Montserrat: "Montserrat, sans-serif",
+      Lato: "Lato, sans-serif",
     },
     container: {
       // center: true,
