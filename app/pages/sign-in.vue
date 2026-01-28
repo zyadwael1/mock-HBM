@@ -10,26 +10,40 @@
         <div class="email-part flex flex-col">
           <div class="email-label">
             <label for="">Email Address</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span v-if="isEmailEmpty" class="asterisk ml-[2px] text-[#ED2100]"
+              >*</span
+            >
           </div>
           <input
+            v-model="email"
             type="email"
             placeholder="Enter Your Email Address"
             class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] border border-[#EAECEF]"
           />
+          <p v-if="emailError" class="text-red-600 text-sm mt-2 ml-2">
+            {{ emailError }}
+          </p>
         </div>
 
         <div class="password-part flex flex-col">
           <div class="password-label">
             <label for="">Password</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span
+              v-if="isPasswordEmpty"
+              class="asterisk ml-[2px] text-[#ED2100]"
+              >*</span
+            >
           </div>
           <div class="password-input relative">
             <input
+              v-model="password"
               type="password"
               placeholder="Enter Password"
               class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-[#EAECEF]"
             />
+            <p v-if="passwordError" class="text-red-600 text-sm mt-2 ml-2">
+              {{ passwordError }}
+            </p>
             <Icon
               name="i:ic-password"
               class="absolute top-6 right-5 text-xl text-[#3B3B3B]"
@@ -58,13 +72,29 @@
 <script setup lang="ts">
 const email = ref("");
 const password = ref("");
+
+const emailError = ref("");
+const passwordError = ref("");
+
+//for asterisk
+const isEmailEmpty = ref(true);
+const isPasswordEmpty = ref(true);
+
 const { signIn } = useAuth();
 const signInManager = () => {
-  signIn()
-  navigateTo('/')
-}
+  emailError.value = "";
+  passwordError.value = "";
 
+  if (!email.value || !password.value) {
+    emailError.value = "Field is required";
+    passwordError.value = "Required";
 
+    return;
+  }
+
+  signIn();
+  navigateTo("/");
+};
 </script>
 
 <style></style>
