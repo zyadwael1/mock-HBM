@@ -9,7 +9,7 @@
       <div class="email-part flex flex-col">
         <div class="email-label">
           <label for="">Email Address</label>
-          <span v-if="isEmailEmpty" class="asterisk ml-[2px] text-alert"
+          <span  class="asterisk ml-[2px] text-alert"
             >*</span
           >
         </div>
@@ -27,7 +27,7 @@
       <div class="password-part flex flex-col">
         <div class="password-label">
           <label for="">Password</label>
-          <span v-if="isPasswordEmpty" class="asterisk ml-[2px] text-alert"
+          <span  class="asterisk ml-[2px] text-alert"
             >*</span
           >
         </div>
@@ -68,9 +68,6 @@ const password = ref("");
 const emailError = ref("");
 const passwordError = ref("");
 
-//for asterisk
-const isEmailEmpty = ref(true);
-const isPasswordEmpty = ref(true);
 
 const { signIn } = useAuth();
 const signInManager = () => {
