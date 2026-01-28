@@ -4,8 +4,19 @@ export const useAuth = () => {
     isAuthenticated.value = true;
   };
 
+  const register = () => {
+    isAuthenticated.value = true;
+  };
+
   return {
     isAuthenticated,
     signIn,
+    register
   };
 };
+
+
+
+
+
+

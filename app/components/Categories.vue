@@ -1,21 +1,20 @@
 <template>
-  <div class="products-list-back-container">
-    <ul class="products-list">
+  <div class="categories-back-container">
+    <ul class="categories">
       <li 
-      v-for="product in products"
-      :key="product.id"
-      >
-        <NuxtLink to="product-path">{{ product.name }}</NuxtLink>
+      v-for="category in categories" 
+      :key="category.id">
+        <NuxtLink to="category-path">{{ category.name }}</NuxtLink>
       </li>
     </ul>
   </div>
 </template>
 <script setup lang="ts">
-interface Product {
+interface Category {
   id: number;
   name: string;
 }
-const products: Product[] = [
+const categories: Category[] = [
   { id: 1, name: "Air conditioners" },
   { id: 2, name: "Washing Machines" },
   { id: 3, name: "Television" },
@@ -28,10 +27,10 @@ const products: Product[] = [
 ];
 </script>
 <style scoped>
-.products-list-back-container {
+.categories-back-container {
   @apply flex justify-center items-center h-[49px] bg-[#F9F9F9] border-y-[0.5px] border-[#DFE1E3];
 }
-.products-list {
+.categories {
   @apply w-[80%] flex justify-around;
 }
 </style>

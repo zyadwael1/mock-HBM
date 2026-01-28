@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <ProductsList />
+    <Categories />
     <slot />
     <Footer />
   </div>
