@@ -98,12 +98,9 @@
         </div>
       </div>
       <div class="buttons flex flex-col items-center w-full">
-        <button
-          class="w-full bg-main-green h-[47px] text-white rounded-xl py-[14px] px-4 mb-5"
-          @click="registerManager"
-        >
-          Create Profile
-        </button>
+        
+        <BaseButton text="Create Profile" @click="registerManager" />
+
         <span
           >By continuing you agree to our
           <NuxtLink class="text-main-green" to="/terms">Terms</NuxtLink>

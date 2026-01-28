@@ -55,12 +55,8 @@
         </div>
       </div>
       <div class="buttons flex flex-col items-center w-full">
-        <button
-          class="w-full bg-main-green h-[47px] text-white rounded-xl py-[14px] px-4 mb-5"
-          @click="signInManager"
-        >
-          Sign In
-        </button>
+        
+        <BaseButton text="Sign in" @click="signInManager" />
         <span
           >Don’t have an account?
           <NuxtLink class="text-main-green" to="/register">Register</NuxtLink>
