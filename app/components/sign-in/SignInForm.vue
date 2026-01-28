@@ -6,6 +6,7 @@
       <h2 class="text-4xl">Sign in</h2>
     </div>
     <div class="inputs w-full flex flex-col gap-7 mt-[64px] mb-[60px]">
+      <!-- 
       <div class="email-part flex flex-col">
         <div class="email-label">
           <label for="">Email Address</label>
@@ -19,27 +20,36 @@
           placeholder="Enter Your Email Address"
           class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
         />
-        <p v-if="emailError" class="text-red-600 text-sm mt-2 ml-2">
+        <p v-if="emailError" class="text-alert text-sm mt-2 ml-2">
           {{ emailError }}
         </p>
-      </div>
+      </div> -->
+
+      <BaseInput
+        v-model="formStates.email"
+        label="Email Address"
+        type="email"
+        placeholder="Enter Your Email Address"
+        :error="formStates.emailError"
+      />
 
       <div class="password-part flex flex-col">
         <div class="password-label">
           <label for="">Password</label>
-          <span  class="asterisk ml-[2px] text-alert"
-            >*</span
-          >
+          <span class="asterisk ml-[2px] text-alert">*</span>
         </div>
         <div class="password-input relative">
           <input
-            v-model="password"
+            v-model="formStates.password"
             type="password"
             placeholder="Enter Password"
             class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
           />
-          <p v-if="passwordError" class="text-red-600 text-sm mt-2 ml-2">
-            {{ passwordError }}
+          <p
+            v-if="formStates.passwordError"
+            class="text-alert text-sm mt-2 ml-2"
+          >
+            {{ formStates.passwordError }}
           </p>
           <Icon
             name="i:ic-password"
@@ -62,21 +72,33 @@
 </template>
 
 <script setup lang="ts">
-const email = ref("");
-const password = ref("");
+const formStates = ref({
+  email: "",
+  password: "",
+  emailError: "",
+  passwordError: "",
+});
 
-const emailError = ref("");
-const passwordError = ref("");
+// const email = ref("");
+// const password = ref("");
 
+// const emailError = ref("");
+// const passwordError = ref("");
 
 const { signIn } = useAuth();
 const signInManager = () => {
-  emailError.value = "";
-  passwordError.value = "";
+  // emailError.value = "";
+  // passwordError.value = "";
 
-  if (!email.value || !password.value) {
-    emailError.value = "Field is required";
-    passwordError.value = "Required";
+  formStates.value.emailError = "";
+  formStates.value.passwordError = "";
+
+  if (!formStates.value.email || !formStates.value.password) {
+    // emailError.value = "Field is required";
+    // passwordError.value = "Required";
+
+    formStates.value.emailError = "Field is required";
+    formStates.value.passwordError = "Required";
 
     return;
   }
