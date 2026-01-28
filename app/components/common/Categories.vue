@@ -28,7 +28,7 @@ const categories: Category[] = [
 </script>
 <style scoped>
 .categories-back-container {
-  @apply flex justify-center items-center h-[49px] bg-[#F9F9F9] border-y-[0.5px] border-[#DFE1E3];
+  @apply flex justify-center items-center h-[49px] bg-light-gray border-y-[0.5px] border-[#DFE1E3];
 }
 .categories {
   @apply w-[80%] flex justify-around;
