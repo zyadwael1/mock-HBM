@@ -1,5 +1,5 @@
 <template>
-    <main class="flex flex-col items-center my-[64px]">
+  <main class="flex flex-col items-center my-[64px]">
     <div
       class="container w-[600px] h-[896px] flex flex-col items-center justify-between"
     >
@@ -8,7 +8,7 @@
       </div>
 
       <div class="inputs w-full flex flex-col gap-7 mt-[64px] mb-[60px]">
-        <div class="first-name-part flex flex-col">
+        <!-- <div class="first-name-part flex flex-col">
           <div class="first-name-label">
             <label for="">First Name</label>
             <span class="asterisk ml-[2px] text-alert">*</span>
@@ -18,12 +18,20 @@
             placeholder="Enter Your First Name"
             class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
-          <p v-if="firstNameError" class="text-red-600 text-sm mt-2 ml-2">
+          <p v-if="firstNameError" class="text-alert text-sm mt-2 ml-2">
             {{ firstNameError }}
           </p>
-        </div>
+        </div> -->
 
-        <div class="last-name-part flex flex-col">
+        <BaseInput
+          v-model="formStates.firstName"
+          label="First Name"
+          type="text"
+          placeholder="Enter Your First Name"
+          :error="formStates.firstNameError"
+        />
+
+        <!-- <div class="last-name-part flex flex-col">
           <div class="last-name-label">
             <label for="">Last Name</label>
             <span class="asterisk ml-[2px] text-alert">*</span>
@@ -33,10 +41,18 @@
             placeholder="Enter Your Last Name"
             class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
-          <p v-if="lastNameError" class="text-red-600 text-sm mt-2 ml-2">
+          <p v-if="lastNameError" class="text-alert text-sm mt-2 ml-2">
             {{ lastNameError }}
           </p>
-        </div>
+        </div> -->
+
+        <BaseInput
+          v-model="formStates.lastName"
+          label="Last Name"
+          type="text"
+          placeholder="Enter Your Last Name"
+          :error="formStates.lastNameError"
+        />
 
         <div class="mobile-number-part flex flex-col">
           <div class="mobile-number-label">
@@ -50,17 +66,26 @@
               +20
             </div>
             <input
+              v-model="formStates.mobileNumber"
               type="number"
               placeholder="xxx xxx xxxx"
               class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
             />
           </div>
-          <p v-if="mobileNumberError" class="text-red-600 text-sm mt-2 ml-2">
+
+          <!-- <p v-if="mobileNumberError" class="text-alert text-sm mt-2 ml-2">
             {{ mobileNumberError }}
+          </p> -->
+
+          <p
+            v-if="formStates.mobileNumberError"
+            class="text-alert text-sm mt-2 ml-2"
+          >
+            {{ formStates.mobileNumberError }}
           </p>
         </div>
 
-        <div class="email-part flex flex-col">
+        <!-- <div class="email-part flex flex-col">
           <div class="email-label">
             <label for="">Email Address</label>
             <span class="asterisk ml-[2px] text-alert">*</span>
@@ -70,10 +95,18 @@
             placeholder="Enter Your Email Address"
             class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
-          <p v-if="emailError" class="text-red-600 text-sm mt-2 ml-2">
+          <p v-if="emailError" class="text-alert text-sm mt-2 ml-2">
             {{ emailError }}
           </p>
-        </div>
+        </div> -->
+
+        <BaseInput
+          v-model="formStates.email"
+          label="Email Address"
+          type="email"
+          placeholder="Enter Your Email Address"
+          :error="formStates.emailError"
+        />
 
         <div class="password-part flex flex-col">
           <div class="password-label">
@@ -82,6 +115,7 @@
           </div>
           <div class="password-input relative">
             <input
+              v-model="formStates.password"
               type="password"
               placeholder="Enter Password"
               class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
@@ -92,8 +126,16 @@
               class="absolute top-6 right-5 text-xl text-[#3B3B3B]"
             ></Icon>
           </div>
-          <p v-if="passwordError" class="text-red-600 text-sm mt-2 ml-2">
+
+          <!-- <p v-if="passwordError" class="text-alert text-sm mt-2 ml-2">
             {{ passwordError }}
+          </p> -->
+
+          <p
+            v-if="formStates.passwordError"
+            class="text-alert text-sm mt-2 ml-2"
+          >
+            {{ formStates.passwordError }}
           </p>
         </div>
       </div>
@@ -119,39 +161,71 @@
 </template>
 
 <script setup lang="ts">
-const firstName = ref("");
-const lastName = ref("");
-const mobileNumber = ref("");
-const email = ref("");
-const password = ref("");
+const formStates = ref({
+  firstName: "",
+  lastName: "",
+  mobileNumber: "",
+  email: "",
+  password: "",
+  firstNameError: "",
+  lastNameError: "",
+  mobileNumberError: "",
+  emailError: "",
+  passwordError: "",
+});
 
-const firstNameError = ref("");
-const lastNameError = ref("");
-const mobileNumberError = ref("");
-const emailError = ref("");
-const passwordError = ref("");
+// const firstName = ref("");
+// const lastName = ref("");
+// const mobileNumber = ref("");
+// const email = ref("");
+// const password = ref("");
+
+// const firstNameError = ref("");
+// const lastNameError = ref("");
+// const mobileNumberError = ref("");
+// const emailError = ref("");
+// const passwordError = ref("");
 
 const { register } = useAuth();
 
 const registerManager = () => {
-  firstNameError.value = "";
-  lastNameError.value = "";
-  mobileNumberError.value = "";
-  emailError.value = "";
-  passwordError.value = "";
+  ((formStates.value.firstNameError = ""),
+    (formStates.value.lastNameError = ""),
+    (formStates.value.mobileNumberError = ""),
+    (formStates.value.emailError = ""),
+    (formStates.value.passwordError = ""));
+
+  // firstNameError.value = "";
+  // lastNameError.value = "";
+  // mobileNumberError.value = "";
+  // emailError.value = "";
+  // passwordError.value = "";
 
   if (
-    !firstName.value ||
-    !lastName.value ||
-    !mobileNumber.value ||
-    !email.value ||
-    !password.value
+    // !firstName.value ||
+    // !lastName.value ||
+    // !mobileNumber.value ||
+    // !email.value ||
+    // !password.value
+
+    !formStates.value.firstName ||
+    !formStates.value.lastName ||
+    !formStates.value.mobileNumber ||
+    !formStates.value.email ||
+    !formStates.value.password
   ) {
-    firstNameError.value = "Required";
-    lastNameError.value = "Required";
-    mobileNumberError.value = "Please enter a valid phone number";
-    emailError.value = "Field is required";
-    passwordError.value = "Required";
+    // firstNameError.value = "Required";
+    // lastNameError.value = "Required";
+    // mobileNumberError.value = "Please enter a valid phone number";
+    // emailError.value = "Field is required";
+    // passwordError.value = "Required";
+
+    formStates.value.firstNameError = "Required";
+    formStates.value.lastNameError = "Required";
+    formStates.value.mobileNumberError = "Required";
+    formStates.value.emailError = "Required";
+    formStates.value.passwordError = "Required";
+
     return;
   }
 
@@ -160,6 +234,4 @@ const registerManager = () => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
