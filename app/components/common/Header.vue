@@ -53,7 +53,7 @@ const { isAuthenticated } = useAuth();
   @apply text-black h-[81px] flex items-center justify-around pt-4 pb-5;
 }
 .header-search-bar-input {
-  @apply bg-[#F9F9F9] w-[823px] px-5 py-3 rounded-xl h-[43px] mt-[18px] border border-[#EAECEF];
+  @apply bg-light-gray w-[823px] px-5 py-3 rounded-xl h-[43px] mt-[18px] border border-border-gray;
 }
 .header-user-actions {
   @apply flex gap-4 text-sm items-center;

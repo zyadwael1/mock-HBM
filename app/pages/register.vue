@@ -11,12 +11,12 @@
         <div class="first-name-part flex flex-col">
           <div class="first-name-label">
             <label for="">First Name</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <input
             type="text"
             placeholder="Enter Your First Name"
-            class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] border border-[#EAECEF]"
+            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
           <p v-if="firstNameError" class="text-red-600 text-sm mt-2 ml-2">
             {{ firstNameError }}
@@ -26,12 +26,12 @@
         <div class="last-name-part flex flex-col">
           <div class="last-name-label">
             <label for="">Last Name</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <input
             type="text"
             placeholder="Enter Your Last Name"
-            class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] border border-[#EAECEF]"
+            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
           <p v-if="lastNameError" class="text-red-600 text-sm mt-2 ml-2">
             {{ lastNameError }}
@@ -41,18 +41,18 @@
         <div class="mobile-number-part flex flex-col">
           <div class="mobile-number-label">
             <label for="">Mobile Number</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <div class="mobile-number-input flex items-center">
             <div
-              class="country-code bg-[#F9F9F9] mt-2 mr-[6px] py-3 px-2 rounded-xl h-[51px] border border-[#EAECEF]"
+              class="country-code bg-light-gray mt-2 mr-[6px] py-3 px-2 rounded-xl h-[51px] border border-border-gray"
             >
               +20
             </div>
             <input
               type="number"
               placeholder="xxx xxx xxxx"
-              class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px]  w-full border border-[#EAECEF]"
+              class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
             />
           </div>
           <p v-if="mobileNumberError" class="text-red-600 text-sm mt-2 ml-2">
@@ -63,12 +63,12 @@
         <div class="email-part flex flex-col">
           <div class="email-label">
             <label for="">Email Address</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <input
             type="email"
             placeholder="Enter Your Email Address"
-            class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] border border-[#EAECEF]"
+            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
           />
           <p v-if="emailError" class="text-red-600 text-sm mt-2 ml-2">
             {{ emailError }}
@@ -78,13 +78,13 @@
         <div class="password-part flex flex-col">
           <div class="password-label">
             <label for="">Password</label>
-            <span class="asterisk ml-[2px] text-[#ED2100]">*</span>
+            <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <div class="password-input relative">
             <input
               type="password"
               placeholder="Enter Password"
-              class="bg-[#F9F9F9] mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-[#EAECEF]"
+              class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
             />
 
             <Icon
@@ -92,13 +92,12 @@
               class="absolute top-6 right-5 text-xl text-[#3B3B3B]"
             ></Icon>
           </div>
-            <p v-if="passwordError" class="text-red-600 text-sm mt-2 ml-2">
-              {{ passwordError }}
-            </p>
+          <p v-if="passwordError" class="text-red-600 text-sm mt-2 ml-2">
+            {{ passwordError }}
+          </p>
         </div>
       </div>
       <div class="buttons flex flex-col items-center w-full">
-        
         <BaseButton text="Create Profile" @click="registerManager" />
 
         <span
@@ -142,10 +141,10 @@ const registerManager = () => {
 
   if (
     !firstName.value ||
-    !lastNameError.value ||
-    !mobileNumberError.value ||
-    !emailError.value ||
-    !passwordError.value
+    !lastName.value ||
+    !mobileNumber.value ||
+    !email.value ||
+    !password.value
   ) {
     firstNameError.value = "Required";
     lastNameError.value = "Required";
