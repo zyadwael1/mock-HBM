@@ -1,11 +1,11 @@
 <template>
   <div
-    class="container w-[600px] h-[492px] flex flex-col items-center justify-between"
+    class="container flex h-[492px] w-[600px] flex-col items-center justify-between"
   >
     <div class="title">
       <h2 class="text-4xl">Sign in</h2>
     </div>
-    <div class="inputs w-full flex flex-col gap-7 mt-[64px] mb-[60px]">
+    <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
       <!-- 
       <div class="email-part flex flex-col">
         <div class="email-label">
@@ -33,35 +33,23 @@
         :error="formStates.emailError"
       />
 
-      <div class="password-part flex flex-col">
-        <div class="password-label">
-          <label for="">Password</label>
-          <span class="asterisk ml-[2px] text-alert">*</span>
-        </div>
-        <div class="password-input relative">
-          <input
-            v-model="formStates.password"
-            type="password"
-            placeholder="Enter Password"
-            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
-          />
-          <p
-            v-if="formStates.passwordError"
-            class="text-alert text-sm mt-2 ml-2"
-          >
-            {{ formStates.passwordError }}
-          </p>
-          <Icon
-            name="i:ic-password"
-            class="absolute top-6 right-5 text-xl text-[#3B3B3B]"
-          ></Icon>
-        </div>
-        <NuxtLink class="self-end text-main-green mt-2" to="/forget-password"
-          >Forgot password?</NuxtLink
-        >
-      </div>
+      <BaseInput
+        v-model="formStates.password"
+        label="Password"
+        type="password"
+        placeholder="Enter Your Password"
+        :error="formStates.passwordError"
+      >
+        <template #trailing>
+          <Icon name="i:ic-password" @click="console.log('dd')" />
+        </template>
+      </BaseInput>
+
+      <NuxtLink class="mt-2 self-end text-main-green" to="/forget-password">
+        Forgot password?
+      </NuxtLink>
     </div>
-    <div class="buttons flex flex-col items-center w-full">
+    <div class="buttons flex w-full flex-col items-center">
       <BaseButton text="Sign in" @click="signInManager" />
       <span
         >Don’t have an account?
@@ -72,6 +60,20 @@
 </template>
 
 <script setup lang="ts">
+interface LoginResponse {
+  data: {
+    access_token: string;
+    user: userAuth;
+  };
+}
+interface userAuth {
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile: string;
+  is_verified: boolean;
+}
+
 const formStates = ref({
   email: "",
   password: "",
@@ -79,26 +81,40 @@ const formStates = ref({
   passwordError: "",
 });
 
-// const email = ref("");
-// const password = ref("");
-
-// const emailError = ref("");
-// const passwordError = ref("");
-
 const { signIn } = useAuth();
-const signInManager = () => {
-  // emailError.value = "";
-  // passwordError.value = "";
+const token = useCookie("access_token");
+const user = useState<userAuth | null>("user", () => null);
 
-  formStates.value.emailError = "";
-  formStates.value.passwordError = "";
+const signInManager = async () => {
+  formStates.value = {
+    ...formStates.value,
+    emailError: "",
+    passwordError: "",
+  };
 
   if (!formStates.value.email || !formStates.value.password) {
-    // emailError.value = "Field is required";
-    // passwordError.value = "Required";
-
     formStates.value.emailError = "Field is required";
     formStates.value.passwordError = "Required";
+
+    try {
+      const authResponse = await $fetch<LoginResponse>(
+        "https://fillcart.staging.hbm.studio/api/v1/login",
+        {
+          method: "POST",
+          body: {
+            email: formStates.value.email,
+            password: formStates.value.password,
+          },
+        },
+      );
+
+      token.value = authResponse.data.access_token;
+      user.value = authResponse.data.user;
+
+      navigateTo("/");
+    } catch (e) {
+      formStates.value.emailError = "Error";
+    }
 
     return;
   }

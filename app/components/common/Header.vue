@@ -1,11 +1,9 @@
 <template>
   <header>
     <div class="header-container">
-      <div class="header-logo">
-        <NuxtLink to="/">
-          <img src="/assets/logo.png" alt="header-logo" />
-        </NuxtLink>
-      </div>
+      <NuxtLink to="/" class="header-logo">
+        <img src="/assets/logo.png" alt="header-logo" />
+      </NuxtLink>
 
       <div class="header-search-bar">
         <!-- <Icon size="24px" name="i:ic-search"></Icon> -->
@@ -45,9 +43,11 @@
     </div>
   </header>
 </template>
+
 <script setup lang="ts">
 const { isAuthenticated } = useAuth();
 </script>
+
 <style scoped>
 .header-container {
   @apply text-black h-[81px] flex items-center justify-around pt-4 pb-5;

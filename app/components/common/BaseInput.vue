@@ -1,31 +1,37 @@
 <template>
   <div>
-    <div class="email-part flex flex-col">
-      <div class="email-label">
+    <div class="flex flex-col gap-2">
+      <div class="flex gap-1">
         <label>{{ label }}</label>
-        <span class="asterisk ml-[2px] text-alert">*</span>
+        <span class="text-alert">*</span>
       </div>
-      <input
-        :value="modelValue"
-        @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-        :type="type"
-        :placeholder="placeholder"
-        class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
-      />
-      <p class="text-alert text-sm mt-2 ml-2">{{ error }}</p>
+
+      <div class="relative w-full">
+        <input
+          v-model="modelValue"
+          class="w-full rounded-xl border border-border-gray bg-light-gray px-5 py-3"
+          :type
+          :placeholder
+        />
+
+        <div class="absolute right-5 top-3.5 text-xl text-[#3B3B3B]">
+          <slot name="trailing" />
+        </div>
+      </div>
+
+      <p v-if="error" class="px-2 text-sm text-alert">{{ error }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 defineProps({
-  modelValue: String,
   label: String,
   type: String,
   placeholder: String,
   error: String,
 });
-const emit = defineEmits(["update:modelValue"]);
-</script>
 
-<style scoped></style>
+const modelValue = defineModel<string>();
+</script>
+  

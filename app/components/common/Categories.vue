@@ -1,36 +1,46 @@
 <template>
-  <div class="categories-back-container">
-    <ul class="categories">
-      <li 
-      v-for="category in categories" 
-      :key="category.id">
-        <NuxtLink to="category-path">{{ category.name }}</NuxtLink>
-      </li>
+  <div
+    class="flex justify-center items-center h-[49px] bg-light-gray border-y-[0.5px] border-[#DFE1E3]categories-back-container overflow-hidden"
+  >
+    <ul
+      class="hide-scroll-bar w-[80%] flex justify-around gap-12 overflow-x-scroll"
+    >
+      <NuxtLink
+        v-for="category in categoriesResponse?.data"
+        class="text-nowrap"
+        :key="category.id"
+        to="category-path"
+      >
+        {{ category.title }}
+      </NuxtLink>
     </ul>
   </div>
 </template>
+
 <script setup lang="ts">
-interface Category {
-  id: number;
-  name: string;
+interface CategoriesResponse {
+  meta: string;
+  data: CategoryType[];
+  pagination: number;
 }
-const categories: Category[] = [
-  { id: 1, name: "Air conditioners" },
-  { id: 2, name: "Washing Machines" },
-  { id: 3, name: "Television" },
-  { id: 4, name: "Fans" },
-  { id: 5, name: "Water Heater" },
-  { id: 6, name: "Water Filters" },
-  { id: 7, name: "Refrigerator" },
-  { id: 8, name: "Vacuum Cleaner" },
-  { id: 9, name: "Brands" },
-];
+
+interface CategoryType {
+  id: string;
+  title: string;
+  order: number;
+  children: any;
+  category_image: string;
+  category_image_ar: string;
+  breadcrumbs_image: string;
+  parent_category?: any;
+}
+
+const { data: categoriesResponse } = useFetch<CategoriesResponse>(
+  "https://fillcart.staging.hbm.studio/api/v2/categories?include=media",
+);
 </script>
 <style scoped>
-.categories-back-container {
-  @apply flex justify-center items-center h-[49px] bg-light-gray border-y-[0.5px] border-[#DFE1E3];
-}
-.categories {
-  @apply w-[80%] flex justify-around;
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
 }
 </style>

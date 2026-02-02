@@ -161,6 +161,20 @@
 </template>
 
 <script setup lang="ts">
+interface RegisterResponse {
+  data: {
+    access_token: string;
+    user: userAuth;
+  };
+}
+interface userAuth {
+  first_name: string;
+  last_name: string;
+  email: string;
+  mobile: string;
+  is_verified: boolean;
+}
+
 const formStates = ref({
   firstName: "",
   lastName: "",
@@ -174,57 +188,51 @@ const formStates = ref({
   passwordError: "",
 });
 
-// const firstName = ref("");
-// const lastName = ref("");
-// const mobileNumber = ref("");
-// const email = ref("");
-// const password = ref("");
-
-// const firstNameError = ref("");
-// const lastNameError = ref("");
-// const mobileNumberError = ref("");
-// const emailError = ref("");
-// const passwordError = ref("");
-
 const { register } = useAuth();
+const token = useCookie("access_token");
+const user = useState<userAuth | null>("user", () => null);
 
-const registerManager = () => {
+const registerManager = async () => {
   ((formStates.value.firstNameError = ""),
     (formStates.value.lastNameError = ""),
     (formStates.value.mobileNumberError = ""),
     (formStates.value.emailError = ""),
     (formStates.value.passwordError = ""));
 
-  // firstNameError.value = "";
-  // lastNameError.value = "";
-  // mobileNumberError.value = "";
-  // emailError.value = "";
-  // passwordError.value = "";
-
   if (
-    // !firstName.value ||
-    // !lastName.value ||
-    // !mobileNumber.value ||
-    // !email.value ||
-    // !password.value
-
     !formStates.value.firstName ||
     !formStates.value.lastName ||
     !formStates.value.mobileNumber ||
     !formStates.value.email ||
     !formStates.value.password
   ) {
-    // firstNameError.value = "Required";
-    // lastNameError.value = "Required";
-    // mobileNumberError.value = "Please enter a valid phone number";
-    // emailError.value = "Field is required";
-    // passwordError.value = "Required";
-
     formStates.value.firstNameError = "Required";
     formStates.value.lastNameError = "Required";
     formStates.value.mobileNumberError = "Required";
     formStates.value.emailError = "Required";
     formStates.value.passwordError = "Required";
+
+    try {
+      const authResponse = await $fetch<RegisterResponse>(
+        "https://fillcart.staging.hbm.studio/api/v1/register",
+        {
+          method: "POST",
+          body: {
+            first_name: formStates.value.firstName,
+            last_name: formStates.value.lastName,
+            mobile: formStates.value.mobileNumber,
+            email: formStates.value.email,
+            password: formStates.value.password,
+          },
+        },
+      );
+
+      token.value = authResponse.data.access_token;
+      user.value = authResponse.data.user;
+      navigateTo("/");
+    } catch (e) {
+      formStates.value.emailError = "Error";
+    }
 
     return;
   }
