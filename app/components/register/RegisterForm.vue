@@ -1,13 +1,13 @@
 <template>
-  <main class="flex flex-col items-center my-[64px]">
+  <main class="my-[64px] flex flex-col items-center">
     <div
-      class="container w-[600px] h-[896px] flex flex-col items-center justify-between"
+      class="container flex h-[896px] w-[600px] flex-col items-center justify-between"
     >
       <div class="title">
         <h2 class="text-4xl">Register</h2>
       </div>
 
-      <div class="inputs w-full flex flex-col gap-7 mt-[64px] mb-[60px]">
+      <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
         <!-- <div class="first-name-part flex flex-col">
           <div class="first-name-label">
             <label for="">First Name</label>
@@ -61,7 +61,7 @@
           </div>
           <div class="mobile-number-input flex items-center">
             <div
-              class="country-code bg-light-gray mt-2 mr-[6px] py-3 px-2 rounded-xl h-[51px] border border-border-gray"
+              class="country-code mr-[6px] mt-2 h-[51px] rounded-xl border border-border-gray bg-light-gray px-2 py-3"
             >
               +20
             </div>
@@ -69,7 +69,7 @@
               v-model="formStates.mobileNumber"
               type="number"
               placeholder="xxx xxx xxxx"
-              class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
+              class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4"
             />
           </div>
 
@@ -79,7 +79,7 @@
 
           <p
             v-if="formStates.mobileNumberError"
-            class="text-alert text-sm mt-2 ml-2"
+            class="ml-2 mt-2 text-sm text-alert"
           >
             {{ formStates.mobileNumberError }}
           </p>
@@ -118,12 +118,12 @@
               v-model="formStates.password"
               type="password"
               placeholder="Enter Password"
-              class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] w-full border border-border-gray"
+              class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4"
             />
 
             <Icon
               name="i:ic-password"
-              class="absolute top-6 right-5 text-xl text-[#3B3B3B]"
+              class="absolute right-5 top-6 text-xl text-[#3B3B3B]"
             ></Icon>
           </div>
 
@@ -133,13 +133,13 @@
 
           <p
             v-if="formStates.passwordError"
-            class="text-alert text-sm mt-2 ml-2"
+            class="ml-2 mt-2 text-sm text-alert"
           >
             {{ formStates.passwordError }}
           </p>
         </div>
       </div>
-      <div class="buttons flex flex-col items-center w-full">
+      <div class="buttons flex w-full flex-col items-center">
         <BaseButton text="Create Profile" @click="registerManager" />
 
         <span
@@ -150,7 +150,7 @@
             >Privacy Policy</NuxtLink
           >
         </span>
-        <hr class="w-full h-[0.5px] my-5" />
+        <hr class="my-5 h-[0.5px] w-full" />
         <span
           >Already have an account?
           <NuxtLink class="text-main-green" to="/sign-in">Sign in</NuxtLink>
