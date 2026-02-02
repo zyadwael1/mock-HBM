@@ -6,6 +6,7 @@
       <h2 class="text-4xl">Sign in</h2>
     </div>
     <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
+      
       <!-- 
       <div class="email-part flex flex-col">
         <div class="email-label">
