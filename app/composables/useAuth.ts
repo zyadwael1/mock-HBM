@@ -1,4 +1,4 @@
-export const useAuth = () => {
+export function useAuth() {
   const isAuthenticated = useState<boolean>("isAuthenticated", () => false);
   const signIn = () => {
     isAuthenticated.value = true;
@@ -8,30 +8,9 @@ export const useAuth = () => {
     isAuthenticated.value = true;
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   return {
     isAuthenticated,
     signIn,
-    register
+    register,
   };
-};
-
-
-
-
-
-
+}

@@ -17,12 +17,12 @@
       <BaseInput
         v-model="formStates.password"
         label="Password"
-        type="password"
         placeholder="Enter Your Password"
+        :type="passwordInputType"
         :error="formStates.passwordError"
       >
         <template #trailing>
-          <Icon name="i:ic-password" @click="console.log('dd')" />
+          <Icon :name="passwordInputIcon" @click="togglePassword" />
         </template>
       </BaseInput>
 
@@ -42,6 +42,9 @@
 
 <script setup lang="ts">
 import { type userAuth, type LoginResponse } from "../../types/types";
+
+const { togglePassword, passwordInputType, passwordInputIcon } =
+  usePasswordToggle();
 
 const formStates = ref({
   email: "",
