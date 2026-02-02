@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex justify-center items-center h-[49px] bg-light-gray border-y-[0.5px] border-[#DFE1E3]categories-back-container overflow-hidden"
+    class="border-[#DFE1E3]categories-back-container flex h-[49px] items-center justify-center overflow-hidden border-y-[0.5px] bg-light-gray"
   >
     <ul
-      class="hide-scroll-bar w-[80%] flex justify-around gap-12 overflow-x-scroll"
+      class="hide-scroll-bar flex w-[80%] justify-around gap-12 overflow-x-scroll"
     >
       <NuxtLink
         v-for="category in categoriesResponse?.data"
@@ -18,22 +18,7 @@
 </template>
 
 <script setup lang="ts">
-interface CategoriesResponse {
-  meta: string;
-  data: CategoryType[];
-  pagination: number;
-}
-
-interface CategoryType {
-  id: string;
-  title: string;
-  order: number;
-  children: any;
-  category_image: string;
-  category_image_ar: string;
-  breadcrumbs_image: string;
-  parent_category?: any;
-}
+import { type CategoriesResponse } from "~/types/types";
 
 const { data: categoriesResponse } = useFetch<CategoriesResponse>(
   "https://fillcart.staging.hbm.studio/api/v2/categories?include=media",
