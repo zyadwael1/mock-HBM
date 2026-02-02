@@ -41,19 +41,7 @@
 </template>
 
 <script setup lang="ts">
-interface LoginResponse {
-  data: {
-    access_token: string;
-    user: userAuth;
-  };
-}
-interface userAuth {
-  first_name: string;
-  last_name: string;
-  email: string;
-  mobile: string;
-  is_verified: boolean;
-}
+import { type userAuth, type LoginResponse } from "../../types/types";
 
 const formStates = ref({
   email: "",
