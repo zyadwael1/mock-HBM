@@ -10,6 +10,6 @@ defineProps({
 
 <style scoped>
 .baseButton {
-  @apply w-full bg-main-green h-[47px] text-white rounded-xl py-[14px] px-4 mb-5;
+  @apply mb-5 h-[47px] w-full rounded-xl bg-main-green px-4 py-[14px] text-white;
 }
 </style>

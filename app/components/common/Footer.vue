@@ -55,22 +55,22 @@
 <script setup lang="ts"></script>
 <style>
 .primary-footer {
-  @apply h-[220px] flex justify-around py-10 px-[50px] bg-main-gray;
+  @apply flex h-[220px] justify-around bg-main-gray px-[50px] py-10;
 }
 .links-style {
   @apply flex flex-col text-sm;
 }
 .links-title {
-  @apply font-bold text-base pb-[15px];
+  @apply pb-[15px] text-base font-bold;
 }
 .info {
-  @apply text-sm flex flex-col justify-start items-center;
+  @apply flex flex-col items-center justify-start text-sm;
 }
 .facebook-logo {
-  @apply flex h-12 mb-[18px] items-center;
+  @apply mb-[18px] flex h-12 items-center;
 }
 .secondary-footer {
-  @apply bg-[#F4F5F6] h-[92px] flex justify-between items-center px-[30px];
+  @apply flex h-[92px] items-center justify-between bg-[#F4F5F6] px-[30px];
 }
 .payment-logos {
   @apply flex gap-3;

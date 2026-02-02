@@ -1,13 +1,7 @@
 <template>
-    <div class="h-[1200px] bg-slate-700">
-
-    </div>
+  <div class="h-[1200px] bg-slate-700"></div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

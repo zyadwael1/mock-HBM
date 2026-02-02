@@ -3,12 +3,10 @@
     <SignInForm />
   </main>
 </template>
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
-.main{
-  @apply flex justify-center my-[64px]
+.main {
+  @apply my-[64px] flex justify-center;
 }
 </style>
