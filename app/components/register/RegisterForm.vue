@@ -59,32 +59,17 @@
           :error="formStates.emailError"
         />
 
-        <div class="password-part flex flex-col">
-          <div class="password-label">
-            <label for="">Password</label>
-            <span class="asterisk ml-[2px] text-alert">*</span>
-          </div>
-          <div class="password-input relative">
-            <input
-              v-model="formStates.password"
-              type="password"
-              placeholder="Enter Password"
-              class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4"
-            />
-
-            <Icon
-              name="i:ic-password"
-              class="absolute right-5 top-6 text-xl text-[#3B3B3B]"
-            ></Icon>
-          </div>
-
-          <p
-            v-if="formStates.passwordError"
-            class="ml-2 mt-2 text-sm text-alert"
-          >
-            {{ formStates.passwordError }}
-          </p>
-        </div>
+        <BaseInput
+          v-model="formStates.password"
+          label="Password"
+          placeholder="Enter Your Password"
+          :type="passwordInputType"
+          :error="formStates.passwordError"
+        >
+          <template #trailing>
+            <Icon :name="passwordInputIcon" @click="togglePassword" />
+          </template>
+        </BaseInput>
       </div>
       <div class="buttons flex w-full flex-col items-center">
         <BaseButton text="Create Profile" @click="registerManager" />
@@ -109,6 +94,9 @@
 
 <script setup lang="ts">
 import { type userAuth, type RegisterResponse } from "../../types/types";
+
+const { togglePassword, passwordInputType, passwordInputIcon } =
+  usePasswordToggle();
 
 const formStates = ref({
   firstName: "",

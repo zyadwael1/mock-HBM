@@ -10,7 +10,6 @@ export function usePasswordToggle() {
     return showPassword.value ? "i:ic-hidden" : "i:ic-password";
   });
   return {
-    showPassword,
     togglePassword,
     passwordInputType,
     passwordInputIcon,
