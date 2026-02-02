@@ -8,6 +8,21 @@ export const useAuth = () => {
     isAuthenticated.value = true;
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   return {
     isAuthenticated,
     signIn,

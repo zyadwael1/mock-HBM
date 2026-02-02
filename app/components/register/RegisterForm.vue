@@ -110,7 +110,6 @@
 <script setup lang="ts">
 import { type userAuth, type RegisterResponse } from "../../types/types";
 
-
 const formStates = ref({
   firstName: "",
   lastName: "",
@@ -125,7 +124,7 @@ const formStates = ref({
 });
 
 const { register } = useAuth();
-const token = useCookie("access_token");
+const authToken = useCookie("access_token");
 const user = useState<userAuth | null>("user", () => null);
 
 const registerManager = async () => {
@@ -166,7 +165,7 @@ const registerManager = async () => {
       },
     );
 
-    token.value = authResponse.data.access_token;
+    authToken.value = authResponse.data.access_token;
     user.value = authResponse.data.user;
     navigateTo("/");
   } catch (e) {

@@ -51,7 +51,7 @@ const formStates = ref({
 });
 
 const { signIn } = useAuth();
-const token = useCookie("access_token");
+const authToken = useCookie("access_token");
 const user = useState<userAuth | null>("user", () => null);
 
 const signInManager = async () => {
@@ -79,7 +79,7 @@ const signInManager = async () => {
       },
     );
 
-    token.value = authResponse.data.access_token;
+    authToken.value = authResponse.data.access_token;
     user.value = authResponse.data.user;
     navigateTo("/");
   } catch (e) {
