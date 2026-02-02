@@ -6,26 +6,6 @@
       <h2 class="text-4xl">Sign in</h2>
     </div>
     <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
-      
-      <!-- 
-      <div class="email-part flex flex-col">
-        <div class="email-label">
-          <label for="">Email Address</label>
-          <span  class="asterisk ml-[2px] text-alert"
-            >*</span
-          >
-        </div>
-        <input
-          v-model="email"
-          type="email"
-          placeholder="Enter Your Email Address"
-          class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
-        />
-        <p v-if="emailError" class="text-alert text-sm mt-2 ml-2">
-          {{ emailError }}
-        </p>
-      </div> -->
-
       <BaseInput
         v-model="formStates.email"
         label="Email Address"
@@ -87,42 +67,35 @@ const token = useCookie("access_token");
 const user = useState<userAuth | null>("user", () => null);
 
 const signInManager = async () => {
-  formStates.value = {
-    ...formStates.value,
-    emailError: "",
-    passwordError: "",
-  };
+  //  ...formStates.value,
+  //   emailError: "",
+  //   passwordError: "",
+  formStates.value.emailError = "";
+  formStates.value.passwordError = "";
 
   if (!formStates.value.email || !formStates.value.password) {
-    formStates.value.emailError = "Field is required";
+    formStates.value.emailError = "Required";
     formStates.value.passwordError = "Required";
-
-    try {
-      const authResponse = await $fetch<LoginResponse>(
-        "https://fillcart.staging.hbm.studio/api/v1/login",
-        {
-          method: "POST",
-          body: {
-            email: formStates.value.email,
-            password: formStates.value.password,
-          },
-        },
-      );
-
-      token.value = authResponse.data.access_token;
-      user.value = authResponse.data.user;
-
-      navigateTo("/");
-    } catch (e) {
-      formStates.value.emailError = "Error";
-    }
-
     return;
   }
 
-  signIn();
-  navigateTo("/");
+  try {
+    const authResponse = await $fetch<LoginResponse>(
+      "https://fillcart.staging.hbm.studio/api/v1/login",
+      {
+        method: "POST",
+        body: {
+          email: formStates.value.email,
+          password: formStates.value.password,
+        },
+      },
+    );
+
+    token.value = authResponse.data.access_token;
+    user.value = authResponse.data.user;
+    navigateTo("/");
+  } catch (e) {
+    formStates.value.emailError = "Error";
+  }
 };
 </script>
-
-<style scoped></style>

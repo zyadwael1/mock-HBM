@@ -8,21 +8,6 @@
       </div>
 
       <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
-        <!-- <div class="first-name-part flex flex-col">
-          <div class="first-name-label">
-            <label for="">First Name</label>
-            <span class="asterisk ml-[2px] text-alert">*</span>
-          </div>
-          <input
-            type="text"
-            placeholder="Enter Your First Name"
-            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
-          />
-          <p v-if="firstNameError" class="text-alert text-sm mt-2 ml-2">
-            {{ firstNameError }}
-          </p>
-        </div> -->
-
         <BaseInput
           v-model="formStates.firstName"
           label="First Name"
@@ -30,21 +15,6 @@
           placeholder="Enter Your First Name"
           :error="formStates.firstNameError"
         />
-
-        <!-- <div class="last-name-part flex flex-col">
-          <div class="last-name-label">
-            <label for="">Last Name</label>
-            <span class="asterisk ml-[2px] text-alert">*</span>
-          </div>
-          <input
-            type="text"
-            placeholder="Enter Your Last Name"
-            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
-          />
-          <p v-if="lastNameError" class="text-alert text-sm mt-2 ml-2">
-            {{ lastNameError }}
-          </p>
-        </div> -->
 
         <BaseInput
           v-model="formStates.lastName"
@@ -67,15 +37,11 @@
             </div>
             <input
               v-model="formStates.mobileNumber"
-              type="number"
+              type="string"
               placeholder="xxx xxx xxxx"
               class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4"
             />
           </div>
-
-          <!-- <p v-if="mobileNumberError" class="text-alert text-sm mt-2 ml-2">
-            {{ mobileNumberError }}
-          </p> -->
 
           <p
             v-if="formStates.mobileNumberError"
@@ -84,21 +50,6 @@
             {{ formStates.mobileNumberError }}
           </p>
         </div>
-
-        <!-- <div class="email-part flex flex-col">
-          <div class="email-label">
-            <label for="">Email Address</label>
-            <span class="asterisk ml-[2px] text-alert">*</span>
-          </div>
-          <input
-            type="email"
-            placeholder="Enter Your Email Address"
-            class="bg-light-gray mt-2 py-4 px-5 rounded-xl h-[51px] border border-border-gray"
-          />
-          <p v-if="emailError" class="text-alert text-sm mt-2 ml-2">
-            {{ emailError }}
-          </p>
-        </div> -->
 
         <BaseInput
           v-model="formStates.email"
@@ -126,10 +77,6 @@
               class="absolute right-5 top-6 text-xl text-[#3B3B3B]"
             ></Icon>
           </div>
-
-          <!-- <p v-if="passwordError" class="text-alert text-sm mt-2 ml-2">
-            {{ passwordError }}
-          </p> -->
 
           <p
             v-if="formStates.passwordError"
@@ -211,34 +158,31 @@ const registerManager = async () => {
     formStates.value.mobileNumberError = "Required";
     formStates.value.emailError = "Required";
     formStates.value.passwordError = "Required";
-
-    try {
-      const authResponse = await $fetch<RegisterResponse>(
-        "https://fillcart.staging.hbm.studio/api/v1/register",
-        {
-          method: "POST",
-          body: {
-            first_name: formStates.value.firstName,
-            last_name: formStates.value.lastName,
-            mobile: formStates.value.mobileNumber,
-            email: formStates.value.email,
-            password: formStates.value.password,
-          },
-        },
-      );
-
-      token.value = authResponse.data.access_token;
-      user.value = authResponse.data.user;
-      navigateTo("/");
-    } catch (e) {
-      formStates.value.emailError = "Error";
-    }
-
     return;
   }
+  try {
+    const authResponse = await $fetch<RegisterResponse>(
+      "https://fillcart.staging.hbm.studio/api/v1/register",
+      {
+        method: "POST",
+        body: {
+          first_name: formStates.value.firstName,
+          last_name: formStates.value.lastName,
+          mobile: formStates.value.mobileNumber,
+          email: formStates.value.email,
+          password: formStates.value.password,
+          device_name: "web-browser",
+          country_code: "+20",
+        },
+      },
+    );
 
-  register();
-  navigateTo("/");
+    token.value = authResponse.data.access_token;
+    user.value = authResponse.data.user;
+    navigateTo("/");
+  } catch (e) {
+    formStates.value.emailError = "Error";
+  }
 };
 </script>
 
