@@ -13,10 +13,10 @@ export default defineNuxtConfig({
       },
     ],
   },
-  components:[
+  components: [
     {
-      path: '~/components',
+      path: "~/components",
       pathPrefix: false,
-    }
-  ]
+    },
+  ],
 });

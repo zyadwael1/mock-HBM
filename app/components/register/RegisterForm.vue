@@ -89,6 +89,7 @@
         </span>
       </div>
     </div>
+    <FormError :error="formStates.formError" />
   </main>
 </template>
 
@@ -109,6 +110,7 @@ const formStates = ref({
   mobileNumberError: "",
   emailError: "",
   passwordError: "",
+  formError: "",
 });
 
 const { register } = useAuth();
@@ -123,6 +125,7 @@ const registerManager = async () => {
     mobileNumberError: "",
     emailError: "",
     passwordError: "",
+    formError: "",
   };
 
   if (
@@ -164,7 +167,7 @@ const registerManager = async () => {
     user.value = authResponse.data.user;
     navigateTo("/");
   } catch (e) {
-    formStates.value.emailError = "Error";
+    formStates.value.formError = "Form Error";
   }
 };
 </script>

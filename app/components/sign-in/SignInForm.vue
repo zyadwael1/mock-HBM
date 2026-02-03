@@ -37,6 +37,7 @@
         <NuxtLink class="text-main-green" to="/register">Register</NuxtLink>
       </span>
     </div>
+    <FormError :error="formStates.formError" />
   </div>
 </template>
 
@@ -51,6 +52,7 @@ const formStates = ref({
   password: "",
   emailError: "",
   passwordError: "",
+  formError: "",
 });
 
 const { signIn } = useAuth();
@@ -62,6 +64,7 @@ const signInManager = async () => {
     ...formStates.value,
     emailError: "",
     passwordError: "",
+    formError: "",
   };
 
   if (!formStates.value.email || !formStates.value.password) {
@@ -90,7 +93,7 @@ const signInManager = async () => {
     user.value = authResponse.data.user;
     navigateTo("/");
   } catch (e) {
-    formStates.value.emailError = "Error";
+    formStates.value.formError = "Form Error";
   }
 };
 </script>
