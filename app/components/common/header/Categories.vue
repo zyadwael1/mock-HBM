@@ -8,8 +8,8 @@
       <NuxtLink
         v-for="category in categoriesResponse?.data"
         class="text-nowrap"
-        :key="category.id"
         to="category-path"
+        :key="category.id"
       >
         {{ category.title }}
       </NuxtLink>
@@ -18,11 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { type CategoriesResponse } from "~/types/types";
-
-const { data: categoriesResponse } = useFetch<CategoriesResponse>(
-  "https://fillcart.staging.hbm.studio/api/v2/categories?include=media",
-);
+const { categoriesResponse } = useCategories();
 </script>
 <style scoped>
 .hide-scroll-bar::-webkit-scrollbar {
