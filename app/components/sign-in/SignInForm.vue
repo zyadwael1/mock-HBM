@@ -42,8 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import { type userAuth, type LoginResponse } from "../../types/types";
-
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
 
@@ -56,8 +54,6 @@ const formStates = ref({
 });
 
 const { signIn } = useAuth();
-const authToken = useCookie("access_token");
-const user = useState<userAuth | null>("user", () => null);
 
 const signInManager = async () => {
   formStates.value = {
@@ -78,22 +74,18 @@ const signInManager = async () => {
   }
 
   try {
-    const authResponse = await $fetch<LoginResponse>(
-      "https://fillcart.staging.hbm.studio/api/v1/login",
-      {
-        method: "POST",
-        body: {
-          email: formStates.value.email,
-          password: formStates.value.password,
-        },
-      },
-    );
-
-    authToken.value = authResponse.data.access_token;
-    user.value = authResponse.data.user;
+    await signIn(formStates.value.email, formStates.value.password);
     navigateTo("/");
-  } catch (e) {
-    formStates.value.formError = "Form Error";
+  } catch (e: any) {
+    console.error("Login error:", e);
+    console.error("Error data:", e.data);
+    console.error("Error message:", e.data?.meta?.errors);
+
+    if (e.data?.meta?.errors?.[0]?.message) {
+      formStates.value.formError = e.data.meta.errors[0].message;
+    } else {
+      formStates.value.formError = "Login failed. Please try again.";
+    }
   }
 };
 </script>

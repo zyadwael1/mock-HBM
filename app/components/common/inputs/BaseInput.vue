@@ -9,7 +9,7 @@
       <div class="relative w-full">
         <input
           v-model="modelValue"
-          class="w-full rounded-xl border border-border-gray bg-light-gray px-5 py-3"
+          class="w-full rounded-xl border border-border-gray bg-light-gray px-5 py-3 focus:outline-main-green "
           :type
           :placeholder
         />

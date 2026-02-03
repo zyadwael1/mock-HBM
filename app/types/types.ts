@@ -1,6 +1,6 @@
 export interface RegisterResponse {
   data: {
-    access_token: string;
+    token: string;
     user: userAuth;
   };
 }

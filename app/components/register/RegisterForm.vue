@@ -94,7 +94,6 @@
 </template>
 
 <script setup lang="ts">
-import { type userAuth, type RegisterResponse } from "../../types/types";
 
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
@@ -114,8 +113,6 @@ const formStates = ref({
 });
 
 const { register } = useAuth();
-const authToken = useCookie("access_token");
-const user = useState<userAuth | null>("user", () => null);
 
 const registerManager = async () => {
   formStates.value = {
@@ -147,27 +144,24 @@ const registerManager = async () => {
     return;
   }
   try {
-    const authResponse = await $fetch<RegisterResponse>(
-      "https://fillcart.staging.hbm.studio/api/v1/register",
-      {
-        method: "POST",
-        body: {
-          first_name: formStates.value.firstName,
-          last_name: formStates.value.lastName,
-          mobile: formStates.value.mobileNumber,
-          email: formStates.value.email,
-          password: formStates.value.password,
-          device_name: "web-browser",
-          country_code: "+20",
-        },
-      },
+    await register(
+      formStates.value.firstName,
+      formStates.value.lastName,
+      formStates.value.mobileNumber,
+      formStates.value.email,
+      formStates.value.password,
     );
-
-    authToken.value = authResponse.data.access_token;
-    user.value = authResponse.data.user;
     navigateTo("/");
-  } catch (e) {
-    formStates.value.formError = "Form Error";
+  } catch (e: any) {
+    console.error("Register error:", e);
+    console.error("Error data:", e.data);
+    console.error("Error message:", e.data?.meta?.errors);
+
+    if (e.data?.meta?.errors?.[0]?.message) {
+      formStates.value.formError = e.data.meta.errors[0].message;
+    } else {
+      formStates.value.formError = "Register failed. Please try again.";
+    }
   }
 };
 </script>

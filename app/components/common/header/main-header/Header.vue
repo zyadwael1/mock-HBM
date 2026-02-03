@@ -17,9 +17,6 @@
   </header>
 </template>
 
-<script setup lang="ts">
-const { isAuthenticated } = useAuth();
-</script>
 
 <style scoped>
 .header-container {

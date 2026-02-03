@@ -8,8 +8,8 @@
     </div>
 
     <div v-else class="signIn-register">
-      <NuxtLink to="/sign-in">Sign in</NuxtLink> /
-      <NuxtLink to="/register">Register</NuxtLink>
+      <NuxtLink to="/sign-in" class="hover:font-semibold">Sign in</NuxtLink> /
+      <NuxtLink to="/register" class="hover:font-semibold">Register</NuxtLink>
     </div>
 
     <div class="wishlist">
@@ -36,6 +36,6 @@ const { isAuthenticated } = useAuth();
   @apply flex items-center gap-4 text-sm;
 }
 .user-links {
-  @apply flex items-center gap-2;
+  @apply flex items-center gap-2 hover:font-semibold;
 }
 </style>
