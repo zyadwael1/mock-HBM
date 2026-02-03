@@ -94,7 +94,6 @@
 </template>
 
 <script setup lang="ts">
-
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
 

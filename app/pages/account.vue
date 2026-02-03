@@ -6,6 +6,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: "auth-middleware",
+});
 const { logout } = useAuth();
 const logoutManager = () => {
   try {

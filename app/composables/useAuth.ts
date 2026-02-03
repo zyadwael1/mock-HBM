@@ -6,6 +6,8 @@ export function useAuth() {
   const isAuthenticated = computed(() => !!authToken.value);
 
   const signIn = async (email: string, password: string) => {
+
+    
     const authResponse = await $fetch<LoginResponse>(
       "https://fillcart.staging.hbm.studio/api/v1/login",
       {
