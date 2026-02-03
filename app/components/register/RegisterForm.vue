@@ -116,11 +116,14 @@ const authToken = useCookie("access_token");
 const user = useState<userAuth | null>("user", () => null);
 
 const registerManager = async () => {
-  ((formStates.value.firstNameError = ""),
-    (formStates.value.lastNameError = ""),
-    (formStates.value.mobileNumberError = ""),
-    (formStates.value.emailError = ""),
-    (formStates.value.passwordError = ""));
+  formStates.value = {
+    ...formStates.value,
+    firstNameError: "",
+    lastNameError: "",
+    mobileNumberError: "",
+    emailError: "",
+    passwordError: "",
+  };
 
   if (
     !formStates.value.firstName ||
@@ -129,11 +132,15 @@ const registerManager = async () => {
     !formStates.value.email ||
     !formStates.value.password
   ) {
-    formStates.value.firstNameError = "Required";
-    formStates.value.lastNameError = "Required";
-    formStates.value.mobileNumberError = "Required";
-    formStates.value.emailError = "Required";
-    formStates.value.passwordError = "Required";
+    formStates.value = {
+      ...formStates.value,
+      firstNameError: "Required",
+      lastNameError: "Required",
+      mobileNumberError: "Required",
+      emailError: "Required",
+      passwordError: "Required",
+    };
+
     return;
   }
   try {

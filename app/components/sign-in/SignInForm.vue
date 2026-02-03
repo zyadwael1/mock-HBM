@@ -58,15 +58,19 @@ const authToken = useCookie("access_token");
 const user = useState<userAuth | null>("user", () => null);
 
 const signInManager = async () => {
-  //  ...formStates.value,
-  //   emailError: "",
-  //   passwordError: "",
-  formStates.value.emailError = "";
-  formStates.value.passwordError = "";
+  formStates.value = {
+    ...formStates.value,
+    emailError: "",
+    passwordError: "",
+  };
 
   if (!formStates.value.email || !formStates.value.password) {
-    formStates.value.emailError = "Required";
-    formStates.value.passwordError = "Required";
+    formStates.value = {
+      ...formStates.value,
+      emailError: "Required",
+      passwordError: "Required",
+    };
+
     return;
   }
 
