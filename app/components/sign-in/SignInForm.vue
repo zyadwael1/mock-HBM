@@ -40,10 +40,14 @@
 </template>
 
 <script setup lang="ts">
+import * as z from "zod";
+
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
-
-const formStates = ref({
+  const emailSchema = z.email();
+  const passwordSchema = z.string().length(8);
+  
+const formStates = ref<any>({
   email: "",
   password: "",
   emailError: "",
@@ -61,11 +65,14 @@ const signInManager = async () => {
     formError: "",
   };
 
-  if (!formStates.value.email || !formStates.value.password) {
+  const validatedEmail = emailSchema.safeParse(formStates.value.email);
+  const validatedPassword = passwordSchema.safeParse(formStates.value.password);
+
+  if (!!validatedEmail || !!validatedPassword) {
     formStates.value = {
       ...formStates.value,
-      emailError: "Required",
-      passwordError: "Required",
+      emailError: validatedEmail.error?.issues[0]?.message,
+      passwordError: validatedPassword.error?.issues[0]?.message,
     };
 
     return;
