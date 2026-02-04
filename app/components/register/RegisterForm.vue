@@ -1,13 +1,11 @@
 <template>
   <main class="my-[64px] flex flex-col items-center">
-    <div
-      class="container flex h-[896px] w-[600px] flex-col items-center justify-between"
-    >
-      <div class="title">
+    <div class="flex h-[896px] w-[600px] flex-col items-center justify-between">
+      <div>
         <h2 class="text-4xl">Register</h2>
       </div>
 
-      <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
+      <div class="mb-[60px] mt-[64px] flex w-full flex-col gap-7">
         <BaseInput
           v-model="formStates.firstName"
           label="First Name"
@@ -24,14 +22,14 @@
           :error="formStates.lastNameError"
         />
 
-        <div class="mobile-number-part flex flex-col">
-          <div class="mobile-number-label">
+        <div class="flex flex-col">
+          <div>
             <label for="">Mobile Number</label>
             <span class="asterisk ml-[2px] text-alert">*</span>
           </div>
           <div class="mobile-number-input flex items-center">
             <div
-              class="country-code mr-[6px] mt-2 h-[51px] rounded-xl border border-border-gray bg-light-gray px-2 py-3"
+              class="mr-[6px] mt-2 h-[51px] rounded-xl border border-border-gray bg-light-gray px-2 py-3"
             >
               +20
             </div>
@@ -71,7 +69,7 @@
           </template>
         </BaseInput>
       </div>
-      <div class="buttons flex w-full flex-col items-center">
+      <div class="flex w-full flex-col items-center">
         <BaseButton text="Create Profile" @click="registerManager" />
 
         <span
@@ -164,5 +162,3 @@ const registerManager = async () => {
   }
 };
 </script>
-
-<style scoped></style>

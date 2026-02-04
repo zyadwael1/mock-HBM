@@ -1,11 +1,9 @@
 <template>
-  <div
-    class="container flex h-[492px] w-[600px] flex-col items-center justify-between"
-  >
-    <div class="title">
+  <div class="flex h-[492px] w-[600px] flex-col items-center justify-between">
+    <div>
       <h2 class="text-4xl">Sign in</h2>
     </div>
-    <div class="inputs mb-[60px] mt-[64px] flex w-full flex-col gap-7">
+    <div class="mb-[60px] mt-[64px] flex w-full flex-col gap-7">
       <BaseInput
         v-model="formStates.email"
         label="Email Address"
@@ -30,7 +28,7 @@
         Forgot password?
       </NuxtLink>
     </div>
-    <div class="buttons flex w-full flex-col items-center">
+    <div class="flex w-full flex-col items-center">
       <BaseButton text="Sign in" @click="signInManager" />
       <span
         >Don’t have an account?

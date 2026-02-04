@@ -1,5 +1,5 @@
 <template>
-  <main class="main">
+  <main class="my-[64px] flex justify-center">
     <SignInForm />
   </main>
 </template>
@@ -9,8 +9,3 @@ definePageMeta({
 });
 </script>
 
-<style scoped>
-.main {
-  @apply my-[64px] flex justify-center;
-}
-</style>

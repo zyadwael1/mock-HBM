@@ -1,7 +1,7 @@
 <template>
-  <div class="header-user-actions">
+  <div class="flex items-center gap-4 text-sm">
     <div v-if="isAuthenticated" class="account">
-      <NuxtLink to="/account" class="user-links">
+      <NuxtLink to="/account" class="flex items-center gap-2 hover:font-semibold">
         <Icon size="24px" name="i:ic-user"></Icon>
         Account
       </NuxtLink>
@@ -13,13 +13,13 @@
     </div>
 
     <div class="wishlist">
-      <NuxtLink to="/wishlist" class="user-links">
+      <NuxtLink to="/wishlist" class="flex items-center gap-2 hover:font-semibold">
         <Icon size="24px" name="i:ic-favorite"></Icon>
         Wishlist
       </NuxtLink>
     </div>
     <div class="cart2">
-      <NuxtLink to="/cart" class="user-links">
+      <NuxtLink to="/cart" class="flex items-center gap-2 hover:font-semibold">
         <Icon size="24px" name="i:ic-cart"></Icon>
         Cart
       </NuxtLink>
@@ -31,11 +31,3 @@
 const { isAuthenticated } = useAuth();
 </script>
 
-<style scoped>
-.header-user-actions {
-  @apply flex items-center gap-4 text-sm;
-}
-.user-links {
-  @apply flex items-center gap-2 hover:font-semibold;
-}
-</style>

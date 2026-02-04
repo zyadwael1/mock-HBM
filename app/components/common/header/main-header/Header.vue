@@ -1,28 +1,19 @@
 <template>
-  <header class="header-container">
-    <NuxtLink to="/" class="header-logo">
+  <header
+    class="flex flex-col flex-wrap items-center justify-around pb-5 pt-4 text-black md:flex-row"
+  >
+    <NuxtLink to="/" class="header-logo order-1 md:order-none">
       <img src="/assets/logo.png" alt="header-logo" />
     </NuxtLink>
 
-    <div class="header-search-bar">
-      <!-- <Icon size="24px" name="i:ic-search"></Icon> -->
+    <div class="order-3 md:order-none">
       <input
         type="search"
         placeholder="Search"
-        class="header-search-bar-input"
+        class=" h-[20px] w-[30px] rounded-xl border border-border-gray bg-light-gray px-5 py-[18px] md:h-[43px] md:w-[823px]"
       />
     </div>
 
-    <UserActions />
+    <UserActions class="order-2 md:order-none" />
   </header>
 </template>
-
-
-<style scoped>
-.header-container {
-  @apply flex h-[81px] items-center justify-around pb-5 pt-4 text-black;
-}
-.header-search-bar-input {
-  @apply mt-[18px] h-[43px] w-[823px] rounded-xl border border-border-gray bg-light-gray px-5 py-3;
-}
-</style>
