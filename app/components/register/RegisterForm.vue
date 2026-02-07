@@ -37,7 +37,8 @@
               v-model="formStates.mobileNumber"
               type="string"
               placeholder="xxx xxx xxxx"
-              class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4"
+              class="mt-2 h-[51px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-4 focus:outline-main-green"
+              @blur="validateInput('mobileNumber')"
             />
           </div>
 
@@ -55,6 +56,7 @@
           type="email"
           placeholder="Enter Your Email Address"
           :error="formStates.emailError"
+          @blur="validateInput('email')"
         />
 
         <BaseInput
@@ -63,6 +65,7 @@
           placeholder="Enter Your Password"
           :type="passwordInputType"
           :error="formStates.passwordError"
+          @blur="validateInput('password')"
         >
           <template #trailing>
             <Icon :name="passwordInputIcon" @click="togglePassword" />
@@ -95,7 +98,9 @@
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
 
-const formStates = ref({
+const { emailSchema, passwordSchema, mobileNumberSchema } = useZodValidation();
+
+const formStates = ref<any>({
   firstName: "",
   lastName: "",
   mobileNumber: "",
@@ -108,8 +113,35 @@ const formStates = ref({
   passwordError: "",
   formError: "",
 });
-
 const { register } = useAuth();
+
+function validateInput(input: "mobileNumber" | "email" | "password") {
+  if (input === "mobileNumber") {
+    const result = mobileNumberSchema.safeParse(formStates.value.mobileNumber);
+    if (result.success || formStates.value.mobileNumber === "") {
+      formStates.value.mobileNumberError = "";
+    } else {
+      formStates.value.mobileNumberError =
+        result.error.issues[0]?.message || "Invalid Number";
+    }
+  } else if (input === "email") {
+    const result = emailSchema.safeParse(formStates.value.email);
+    if (result.success || formStates.value.email === "") {
+      formStates.value.emailError = "";
+    } else {
+      formStates.value.emailError =
+        result.error.issues[0]?.message || "Invalid Email";
+    }
+  } else {
+    const result = passwordSchema.safeParse(formStates.value.password);
+    if (result.success || formStates.value.password === "") {
+      formStates.value.passwordError = "";
+    } else {
+      formStates.value.passwordError =
+        result.error.issues[0]?.message || "Invalid Password";
+    }
+  }
+}
 
 const registerManager = async () => {
   formStates.value = {
@@ -121,21 +153,26 @@ const registerManager = async () => {
     passwordError: "",
     formError: "",
   };
+  const validatedEmail = emailSchema.safeParse(formStates.value.email);
+  const validatedPassword = passwordSchema.safeParse(formStates.value.password);
+  const validatedMobileNumber = mobileNumberSchema.safeParse(
+    formStates.value.mobileNumber,
+  );
 
   if (
     !formStates.value.firstName ||
     !formStates.value.lastName ||
-    !formStates.value.mobileNumber ||
-    !formStates.value.email ||
-    !formStates.value.password
+    !validatedMobileNumber.success ||
+    !validatedEmail.success ||
+    !validatedPassword.success
   ) {
     formStates.value = {
       ...formStates.value,
       firstNameError: "Required",
       lastNameError: "Required",
-      mobileNumberError: "Required",
-      emailError: "Required",
-      passwordError: "Required",
+      mobileNumberError: validatedMobileNumber.error?.issues[0]?.message,
+      emailError: validatedEmail.error?.issues[0]?.message,
+      passwordError: validatedPassword.error?.issues[0]?.message,
     };
 
     return;

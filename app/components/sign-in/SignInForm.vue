@@ -10,6 +10,7 @@
         type="email"
         placeholder="Enter Your Email Address"
         :error="formStates.emailError"
+        @blur="validateInput('email')"
       />
 
       <BaseInput
@@ -18,6 +19,7 @@
         placeholder="Enter Your Password"
         :type="passwordInputType"
         :error="formStates.passwordError"
+        @blur="validateInput('password')"
       >
         <template #trailing>
           <Icon :name="passwordInputIcon" @click="togglePassword" />
@@ -44,9 +46,9 @@ import * as z from "zod";
 
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
-  const emailSchema = z.email();
-  const passwordSchema = z.string().length(8);
-  
+
+const { emailSchema, passwordSchema } = useZodValidation();
+
 const formStates = ref<any>({
   email: "",
   password: "",
@@ -56,6 +58,26 @@ const formStates = ref<any>({
 });
 
 const { signIn } = useAuth();
+
+function validateInput(field: "email" | "password") {
+  if (field === "email") {
+    const result = emailSchema.safeParse(formStates.value.email);
+    if (result.success || formStates.value.email === "") {
+      formStates.value.emailError = "";
+    } else {
+      formStates.value.emailError =
+        result.error.issues[0]?.message || "Invalid email";
+    }
+  } else {
+    const result = passwordSchema.safeParse(formStates.value.password);
+    if (result.success || formStates.value.password === "") {
+      formStates.value.passwordError = "";
+    } else {
+      formStates.value.passwordError =
+        result.error.issues[0]?.message || "Invalid password";
+    }
+  }
+}
 
 const signInManager = async () => {
   formStates.value = {
@@ -68,7 +90,9 @@ const signInManager = async () => {
   const validatedEmail = emailSchema.safeParse(formStates.value.email);
   const validatedPassword = passwordSchema.safeParse(formStates.value.password);
 
-  if (!!validatedEmail || !!validatedPassword) {
+  // const validatedLogin = loginSchema.safeParse(formStates.value.email, formStates.value.password)
+
+  if (!validatedEmail.success || !validatedPassword.success) {
     formStates.value = {
       ...formStates.value,
       emailError: validatedEmail.error?.issues[0]?.message,

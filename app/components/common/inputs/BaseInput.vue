@@ -9,9 +9,10 @@
       <div class="relative w-full">
         <input
           v-model="modelValue"
-          class="w-full rounded-xl border border-border-gray bg-light-gray px-5 py-3 focus:outline-main-green "
+          class="w-full rounded-xl border border-border-gray bg-light-gray px-5 py-3 focus:outline-main-green"
           :type
           :placeholder
+          @blur="$emit('blur')"
         />
 
         <div class="absolute right-5 top-3.5 text-xl text-[#3B3B3B]">
@@ -19,7 +20,7 @@
         </div>
       </div>
 
-      <p v-if="error" class="px-2 text-sm text-alert">{{ error }}</p>
+      <p v-if="error" class="px-2 text-sm text-alert ">{{ error }}</p>
     </div>
   </div>
 </template>
@@ -31,6 +32,8 @@ defineProps({
   placeholder: String,
   error: String,
 });
-
+defineEmits<{
+  (e: "blur"): void;
+}>();
 const modelValue = defineModel<string>();
 </script>
