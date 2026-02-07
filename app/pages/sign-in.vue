@@ -1,5 +1,5 @@
 <template>
-  <main class="my-[64px] flex justify-center">
+  <main class="py-[64px] flex justify-center">
     <SignInForm />
   </main>
 </template>

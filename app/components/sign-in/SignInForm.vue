@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[492px] w-[600px] flex-col items-center justify-between">
+  <div class="flex min-h-[492px] w-[600px] flex-col items-center justify-between">
     <div>
       <h2 class="text-4xl">Sign in</h2>
     </div>

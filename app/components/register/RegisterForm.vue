@@ -1,6 +1,6 @@
 <template>
   <main class="my-[64px] flex flex-col items-center">
-    <div class="flex h-[896px] w-[600px] flex-col items-center justify-between">
+    <div class="flex min-h-[896px] w-[600px] flex-col items-center justify-between">
       <div>
         <h2 class="text-4xl">Register</h2>
       </div>
