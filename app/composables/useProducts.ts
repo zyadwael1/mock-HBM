@@ -5,9 +5,21 @@ export function useProducts() {
   const route = useRoute();
 
   const fetchProducts = async () => {
-    return await $fetch<ProductsResponse>(
-      `https://fillcart.staging.hbm.studio/api/v2/products?per_page=${route.query.per_page}&filter[v2_categories]=${route.query.category}`,
-    );
+    const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products";
+    let queryString = "";
+
+    if (route.query.per_page) {
+      queryString += `?per_page=${route.query.per_page}`;
+    }
+
+    if (route.query.page) {
+      queryString += `&page=${route.query.page}`;
+    }
+    if (route.query.category) {
+      queryString += `&filter[v2_categories]=${route.query.category}`;
+    }
+
+    return await $fetch<ProductsResponse>(`${baseUrl}${queryString}`);
   };
 
   watch(

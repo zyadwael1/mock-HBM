@@ -24,7 +24,8 @@
 <script setup lang="ts">
 const { categoriesResponse } = useCategories();
 const selectedCategory = useState<string>("selectedCategory");
-const per_page = 2;
+const per_page = 20;
+const current_page = 1;
 const router = useRouter();
 
 // Try spreading
@@ -39,6 +40,7 @@ const categorySelection = async (id: string) => {
     path: "/products",
     query: {
       per_page: per_page,
+      page: current_page,
       category: selectedCategory.value,
     },
   });
