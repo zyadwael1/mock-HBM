@@ -13,7 +13,7 @@
           query: { category: category.id },
         }"
         :key="category.id"
-        @click="categorySelection(category.id)"
+        @click="selectCategory(category)"
       >
         {{ category.title }}
       </NuxtLink>
@@ -22,30 +22,36 @@
 </template>
 
 <script setup lang="ts">
+import { type CategoryState } from "~/types/types";
+
 const { categoriesResponse } = useCategories();
-const selectedCategory = useState<string>("selectedCategory");
-const per_page = 20;
-const current_page = 1;
+const selectedCategory = useState<CategoryState | null>("selectedCategory");
+
+const per_page = categoriesResponse.value?.pagination.per_page;
+const current_page = categoriesResponse.value?.pagination.current_page;
 const router = useRouter();
+const route = useRoute();
 
 // Try spreading
 // const routeQueries = {
-//   category: selectedCategory.value,
 //   per_page: per_page,
+//   page: current_page,
+//   category: selectedCategory.value?.id,
 // };
 
-const categorySelection = async (id: string) => {
-  selectedCategory.value = id;
+const selectCategory = async (category: CategoryState) => {
+  selectedCategory.value = {
+    id: category.id,
+    title: category.title,
+  };
   await router.push({
     path: "/products",
     query: {
       per_page: per_page,
       page: current_page,
-      category: selectedCategory.value,
+      category: selectedCategory.value.id,
     },
   });
-
-  console.log("Category State : ", selectedCategory.value);
 };
 </script>
 <style scoped>

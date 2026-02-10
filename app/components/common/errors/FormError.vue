@@ -10,5 +10,4 @@
 defineProps({
   error: String,
 });
-
 </script>

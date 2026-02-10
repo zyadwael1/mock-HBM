@@ -11,8 +11,3 @@ export function useZodValidation() {
     mobileNumberSchema,
   };
 }
-
-// const loginSchema = z.object({
-//   email: z.email(),
-//   password: z.string().length(8)
-// });

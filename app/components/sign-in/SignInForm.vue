@@ -42,7 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import * as z from "zod";
 
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
@@ -90,7 +89,6 @@ const signInManager = async () => {
   const validatedEmail = emailSchema.safeParse(formStates.value.email);
   const validatedPassword = passwordSchema.safeParse(formStates.value.password);
 
-  // const validatedLogin = loginSchema.safeParse(formStates.value.email, formStates.value.password)
 
   if (!validatedEmail.success || !validatedPassword.success) {
     formStates.value = {
