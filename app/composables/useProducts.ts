@@ -5,7 +5,7 @@ export function useProducts() {
   const route = useRoute();
 
   const fetchProducts = async () => {
-    const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products";
+    const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products?";
     let queryString = "";
 
     if (route.query.per_page) {

@@ -10,7 +10,7 @@
       <input
         type="search"
         placeholder="Search"
-        class=" h-[20px] w-[30px] rounded-xl border border-border-gray bg-light-gray px-5 py-[18px] md:h-[43px] md:w-[823px]"
+        class="h-[20px] w-[30px] rounded-xl border border-border-gray bg-light-gray px-5 py-[18px] md:h-[43px] md:w-[823px]"
       />
     </div>
 

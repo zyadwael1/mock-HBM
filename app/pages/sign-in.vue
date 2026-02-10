@@ -1,5 +1,5 @@
 <template>
-  <main class="py-[64px] flex justify-center">
+  <main class="flex justify-center py-[64px]">
     <SignInForm />
   </main>
 </template>
@@ -8,4 +8,3 @@ definePageMeta({
   middleware: "guest-middleware",
 });
 </script>
-

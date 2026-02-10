@@ -21,7 +21,12 @@ export type userAuth = {
 export type CategoriesResponse = {
   meta: string;
   data: CategoryType[];
-  pagination: number;
+  pagination: {
+    current_page: number;
+    last_page: number;
+    total: number;
+    per_page: number;
+  };
 };
 
 export type CategoryType = {
@@ -33,6 +38,10 @@ export type CategoryType = {
   category_image_ar: string;
   breadcrumbs_image: string;
   parent_category?: any;
+};
+export type CategoryState = {
+  id: string;
+  title: string;
 };
 
 // ===== PRODUCTS TYPES (CORRECTED) =====
@@ -48,7 +57,7 @@ export type ProductsResponse = {
     total: number;
     per_page: number;
   };
-}
+};
 
 export type ProductType = {
   id: string;
@@ -80,4 +89,4 @@ export type ProductType = {
   model_type: string; // e.g., "product"
   hidden: boolean;
   customizable_fields: any[];
-}
+};

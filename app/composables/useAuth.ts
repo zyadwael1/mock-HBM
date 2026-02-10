@@ -1,4 +1,8 @@
-import { type userAuth, type LoginResponse, type RegisterResponse  } from "../types/types";
+import {
+  type userAuth,
+  type LoginResponse,
+  type RegisterResponse,
+} from "../types/types";
 
 export function useAuth() {
   const authToken = useCookie("access_token");
@@ -6,8 +10,6 @@ export function useAuth() {
   const isAuthenticated = computed(() => !!authToken.value);
 
   const signIn = async (email: string, password: string) => {
-
-    
     const authResponse = await $fetch<LoginResponse>(
       "https://fillcart.staging.hbm.studio/api/v1/login",
       {
@@ -29,7 +31,13 @@ export function useAuth() {
     return authResponse;
   };
 
-  const register = async (firstName: string, lastName: string, mobileNumber: string, email: string, password: string) => {
+  const register = async (
+    firstName: string,
+    lastName: string,
+    mobileNumber: string,
+    email: string,
+    password: string,
+  ) => {
     const authResponse = await $fetch<RegisterResponse>(
       "https://fillcart.staging.hbm.studio/api/v1/register",
       {
@@ -58,8 +66,7 @@ export function useAuth() {
   const logout = () => {
     authToken.value = null;
     user.value = null;
-  }
-
+  };
 
   return {
     user,
@@ -67,6 +74,6 @@ export function useAuth() {
     isAuthenticated,
     signIn,
     register,
-    logout
+    logout,
   };
 }

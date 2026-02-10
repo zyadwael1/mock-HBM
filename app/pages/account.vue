@@ -19,5 +19,3 @@ const logoutManager = () => {
   }
 };
 </script>
-
-
