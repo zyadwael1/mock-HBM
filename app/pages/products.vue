@@ -1,9 +1,12 @@
 <template>
-  <div class="flex flex-col md:px-16 md:py-8">
-    <h2 v-if="selectedCategory?.title" class="py-5 text-4xl font-semibold">
+  <div class="flex flex-col px-8 md:px-16 md:py-8">
+    <h2
+      v-if="selectedCategory?.title"
+      class="py-5 text-2xl font-semibold md:text-4xl"
+    >
       {{ selectedCategory?.title }}
     </h2>
-    <h2 v-else class="py-5 text-4xl font-semibold">All Products</h2>
+    <h2 v-else class="py-5 text-2xl font-semibold md:text-4xl">All Products</h2>
     <ProductsGrid />
     <PaginationButtons
       v-if="productsResponse?.pagination"

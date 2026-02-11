@@ -1,4 +1,3 @@
-<!-- components/PaginationButtons.vue -->
 <template>
   <div v-if="lastPage > 1" class="flex items-center justify-center gap-2 py-8">
     <button

@@ -1,7 +1,11 @@
 <template>
-  <main class="flex min-h-[420px] w-[250px] flex-col gap-3 rounded-xl">
+  <main
+    class="flex min-h-[260px] w-[154px] flex-col gap-3 rounded-xl md:min-h-[420px] md:w-[250px]"
+  >
     <div class="relative">
-      <div class="h-[294px] w-full rounded-xl border-[0.5px] border-gray-200">
+      <div
+        class="h-[150px] w-full rounded-xl border-[0.5px] border-gray-200 md:h-[294px]"
+      >
         <NuxtImg
           class="h-full w-full object-contain"
           alt="Product Image"

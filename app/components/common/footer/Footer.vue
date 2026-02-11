@@ -1,5 +1,5 @@
 <template>
-  <footer class="min-h-[312px]">
+  <footer class="min-h-[312px] ">
     <div
       class="flex min-h-[220px] flex-col justify-around bg-main-gray px-[50px] py-10 md:flex-row"
     >
@@ -43,10 +43,22 @@
       <div class="copy-rights-1">&copy; Fillcart. All Rights Reserved .</div>
       <div class="flex gap-3">
         <span>Payment Powered by</span>
-        <img src="/assets/Paymob Logo (1) 1.png" alt="paymob" />
-        <img src="/assets/Mastercard-logo 1.png" alt="mastercard" />
-        <img src="/assets/58482363cef1014c0b5e49c1 1.png" alt="visa" />
-        <img src="/assets/ميزة 1.png" alt="misa" />
+        <img
+          src="/assets/Paymob Logo (1) 1.png"
+          alt="paymob"
+          class="w-[50px]"
+        />
+        <img
+          src="/assets/Mastercard-logo 1.png"
+          alt="mastercard"
+          class="w-[50px]"
+        />
+        <img
+          src="/assets/58482363cef1014c0b5e49c1 1.png"
+          alt="visa"
+          class="w-[50px]"
+        />
+        <img src="/assets/ميزة 1.png" alt="misa" class="w-[50px]" />
       </div>
       <div class="flex gap-[6px]">
         <span>&copy; Powered by</span>
