@@ -7,11 +7,12 @@
       {{ selectedCategory?.title }}
     </h2>
     <h2 v-else class="py-5 text-2xl font-semibold md:text-4xl">All Products</h2>
-    <span class="self-end px-48"
+    <span class="self-end  md:px-48"
       >{{ productsResponse?.pagination.total }} Item{{
         productsResponse?.pagination.total !== 1 ? "s" : ""
       }}</span
     >
+    <Sort class="self-end md:px-48 py-10"/>
     <ProductsGrid />
     <PaginationButtons
       v-if="productsResponse?.pagination"

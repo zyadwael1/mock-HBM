@@ -18,6 +18,9 @@ export function useProducts() {
     if (route.query.category) {
       queryString += `&filter[v2_categories]=${route.query.category}`;
     }
+    if (route.query.sort) {
+      queryString += `&sort=${route.query.sort}`;
+    }
 
     return await $fetch<ProductsResponse>(`${baseUrl}${queryString}`);
   };
