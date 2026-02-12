@@ -1,5 +1,5 @@
 <template>
-  <footer class="min-h-[312px] ">
+  <footer class="min-h-[312px]">
     <div
       class="flex min-h-[220px] flex-col justify-around bg-main-gray px-[50px] py-10 md:flex-row"
     >

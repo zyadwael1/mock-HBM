@@ -1,5 +1,8 @@
 <template>
-  <div v-if="lastPage > 1" class="flex items-center justify-center gap-2 py-8">
+  <div
+    v-if="lastPage > 1"
+    class="flex scale-75 items-center justify-center gap-1 py-8 md:scale-100 md:gap-2"
+  >
     <button
       class="rounded-md border px-4 py-2 transition-colors"
       :disabled="currentPage === 1"
