@@ -1,18 +1,19 @@
 <template>
   <div class="flex flex-col px-8 md:px-16 md:py-8">
-    <h2
-      v-if="selectedCategory?.title"
-      class="py-5 text-2xl font-semibold md:text-4xl"
-    >
-      {{ selectedCategory?.title }}
-    </h2>
-    <h2 v-else class="py-5 text-2xl font-semibold md:text-4xl">All Products</h2>
-    <span class="self-end md:px-48"
-      >{{ productsResponse?.pagination.total }} Item{{
-        productsResponse?.pagination.total !== 1 ? "s" : ""
-      }}</span
-    >
-    <Sort class="self-end py-10 md:px-48" />
+    <div class="flex items-center justify-between py-5 md:px-40">
+      <di class="text-2xl font-semibold md:text-4xl">
+        <h2 v-if="selectedCategory?.title">
+          {{ selectedCategory?.title }}
+        </h2>
+        <h2 v-else>All Products</h2>
+      </di>
+      <span
+        >{{ productsResponse?.pagination.total }} Item{{
+          productsResponse?.pagination.total !== 1 ? "s" : ""
+        }}</span
+      >
+    </div>
+    <Sort class="self-end py-5 md:px-40" />
     <ProductsGrid />
     <PaginationButtons
       v-if="productsResponse?.pagination"

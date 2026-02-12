@@ -1,11 +1,8 @@
 <template>
   <div class="flex items-center gap-4 text-sm">
-    <div v-if="isAuthenticated" class="account">
-      <NuxtLink
-        to="/account"
-        class="flex items-center gap-2 hover:font-semibold"
-      >
-        <Icon size="24px" name="i:ic-user"></Icon>
+    <div v-if="isAuthenticated" class="flex items-center gap-2">
+      <Icon size="24px" name="i:ic-user"></Icon>
+      <NuxtLink to="/account" class="hidden hover:font-semibold md:block">
         Account
       </NuxtLink>
     </div>
@@ -15,18 +12,15 @@
       <NuxtLink to="/register" class="hover:font-semibold">Register</NuxtLink>
     </div>
 
-    <div class="wishlist">
-      <NuxtLink
-        to="/wishlist"
-        class="flex items-center gap-2 hover:font-semibold"
-      >
-        <Icon size="24px" name="i:ic-favorite"></Icon>
+    <div class="flex items-center gap-2">
+      <Icon size="24px" name="i:ic-favorite"></Icon>
+      <NuxtLink to="/wishlist" class="hidden hover:font-semibold md:block">
         Wishlist
       </NuxtLink>
     </div>
-    <div class="cart2">
-      <NuxtLink to="/cart" class="flex items-center gap-2 hover:font-semibold">
-        <Icon size="24px" name="i:ic-cart"></Icon>
+    <div class="flex items-center gap-2">
+      <Icon size="24px" name="i:ic-cart"></Icon>
+      <NuxtLink to="/cart" class="hidden hover:font-semibold md:block">
         Cart
       </NuxtLink>
     </div>
