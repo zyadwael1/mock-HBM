@@ -13,7 +13,7 @@
         }}</span
       >
     </div>
-    <Sort class="self-end py-5 md:px-40" />
+    <Sort class="my-5 self-end md:mx-40" />
     <ProductsGrid />
     <PaginationButtons
       v-if="productsResponse?.pagination"

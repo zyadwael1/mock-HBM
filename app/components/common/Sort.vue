@@ -1,5 +1,5 @@
 <template>
-  <main class="relative">
+  <main class="relative" ref="dropdownRef">
     <button
       class="flex h-10 min-w-28 items-center justify-around rounded-xl border-[0.5px] border-gray-200 px-2 hover:bg-gray-50 md:w-48"
       @click="handleDropdown"
@@ -29,6 +29,7 @@ const { sortByOption } = useSort();
 const isOptionsOpen = ref(false);
 const currentLabel = ref("Default");
 const isThereAnOption = ref(false);
+const dropdownRef = ref<HTMLElement | null>(null);
 
 const sortingOptions = {
   Default: "",
@@ -47,4 +48,18 @@ const handleSorting = (option: string, key: string) => {
   sortByOption(option);
   isOptionsOpen.value = false;
 };
+
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
+    isOptionsOpen.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
