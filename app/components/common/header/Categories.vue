@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import { boolean } from "zod";
 import { type CategoryState } from "~/types/types";
 
 const { categoriesResponse } = useCategories();
@@ -50,6 +51,7 @@ const selectCategory = async (category: CategoryState) => {
       per_page: per_page,
       page: current_page,
       category: selectedCategory.value.id,
+      
     },
   });
 };
