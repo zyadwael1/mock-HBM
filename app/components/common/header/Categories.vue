@@ -51,7 +51,6 @@ const selectCategory = async (category: CategoryState) => {
       per_page: per_page,
       page: current_page,
       category: selectedCategory.value.id,
-      
     },
   });
 };

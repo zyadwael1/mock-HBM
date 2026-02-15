@@ -3,8 +3,8 @@
     <div class="flex cursor-pointer justify-between" @click="handleFilter">
       <h3>{{ title }}</h3>
       <Icon
-        :name="isFilterOpen ? 'i:ic-minus' : 'i:ic-plus'"
         class="text-2xl text-black transition-transform duration-200 md:text-3xl"
+        :name="isFilterOpen ? 'i:ic-minus' : 'i:ic-plus'"
       />
     </div>
     <div
