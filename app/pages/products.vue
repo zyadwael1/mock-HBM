@@ -13,12 +13,17 @@
         }}</span
       >
     </div>
+
     <Sort class="my-5 self-end md:mx-40" />
+
     <div class="flex flex-col gap-4 md:flex-row">
       <div class="flex">
-
         <Transition name="fade">
-          <Drawer v-if="isDrawerOpen" v-model:open="isDrawerOpen" class="flex flex-col gap-7 px-5">
+          <Drawer
+            v-if="isDrawerOpen"
+            v-model:open="isDrawerOpen"
+            class="flex flex-col gap-7 px-5"
+          >
             <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
             <hr class="md:hidden" />
             <FilterPart :title="'Brands'"> Brands </FilterPart>
@@ -39,9 +44,9 @@
         />
         <span class="px-3">Filters</span>
       </div>
+
       <div>
-        
-        <ProductsGrid />
+        <ProductsGrid :products="productsResponse?.data" />
         <PaginationButtons
           v-if="productsResponse?.pagination"
           :current-page="productsResponse.pagination.current_page"
@@ -57,6 +62,7 @@
 import { type CategoryState } from "~/types/types";
 const { productsResponse } = useProducts();
 const { categoriesResponse } = useCategories();
+
 const selectedCategory = useState<CategoryState | null>("selectedCategory");
 const router = useRouter();
 const route = useRoute();
