@@ -16,8 +16,9 @@
     <Sort class="my-5 self-end md:mx-40" />
     <div class="flex flex-col gap-4 md:flex-row">
       <div class="flex">
-        <Drawer v-model:open="isDrawerOpen">
-          <h2>Filter by</h2>
+        <Drawer v-model:open="isDrawerOpen" class="flex flex-col gap-7 px-5">
+          <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
+          <hr class="md:hidden" />
           <FilterPart :title="'Brands'"> Brands </FilterPart>
           <hr />
           <FilterPart :title="'Price'"> Price </FilterPart>
@@ -38,7 +39,6 @@
         <ProductsGrid />
         <PaginationButtons
           v-if="productsResponse?.pagination"
-          class=""
           :current-page="productsResponse.pagination.current_page"
           :last-page="productsResponse.pagination.last_page"
           :total="productsResponse.pagination.total"
@@ -63,21 +63,20 @@ const handleDrawer = async () => {
     path: route.path,
     query: {
       ...route.query,
-      filter_bar: newState ? 'true' : undefined, 
+      filter_bar: newState ? "true" : undefined,
     },
   });
 };
 
-
 // Sync isDrawerOpen changes to URL
 watch(isDrawerOpen, async (newValue) => {
-  const currentFilterBar = route.query.filter_bar === 'true';
+  const currentFilterBar = route.query.filter_bar === "true";
   if (newValue !== currentFilterBar) {
     await router.push({
       path: route.path,
       query: {
         ...route.query,
-        filter_bar: newValue ? 'true' : undefined,
+        filter_bar: newValue ? "true" : undefined,
       },
     });
   }
@@ -87,9 +86,9 @@ watch(isDrawerOpen, async (newValue) => {
 watch(
   () => route.query.filter_bar,
   (filterBarQuery) => {
-    isDrawerOpen.value = filterBarQuery === 'true';
+    isDrawerOpen.value = filterBarQuery === "true";
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
