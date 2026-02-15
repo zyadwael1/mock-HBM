@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/icon": "2.2.1",
     "@nuxt/image": "2.0.0",
+    "@tailwindcss/postcss": "^4.1.18",
     "@tailwindplus/elements": "^1.0.22",
     "nuxt": "^4.3.0",
     "vue": "^3.5.27",

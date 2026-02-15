@@ -16,17 +16,21 @@
     <Sort class="my-5 self-end md:mx-40" />
     <div class="flex flex-col gap-4 md:flex-row">
       <div class="flex">
-        <Drawer v-model:open="isDrawerOpen" class="flex flex-col gap-7 px-5">
-          <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
-          <hr class="md:hidden" />
-          <FilterPart :title="'Brands'"> Brands </FilterPart>
-          <hr />
-          <FilterPart :title="'Price'"> Price </FilterPart>
-          <hr />
-          <FilterPart :title="'Rating'"> Rating </FilterPart>
-          <hr />
-          <FilterPart :title="'Special Tags'"> Special Tags </FilterPart>
-        </Drawer>
+
+        <Transition name="fade">
+          <Drawer v-if="isDrawerOpen" v-model:open="isDrawerOpen" class="flex flex-col gap-7 px-5">
+            <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
+            <hr class="md:hidden" />
+            <FilterPart :title="'Brands'"> Brands </FilterPart>
+            <hr />
+            <FilterPart :title="'Price'"> Price </FilterPart>
+            <hr />
+            <FilterPart :title="'Rating'"> Rating </FilterPart>
+            <hr />
+            <FilterPart :title="'Special Tags'"> Special Tags </FilterPart>
+          </Drawer>
+        </Transition>
+
         <Icon
           v-if="!isDrawerOpen"
           name="i:ic-filter"
@@ -36,6 +40,7 @@
         <span class="px-3">Filters</span>
       </div>
       <div>
+        
         <ProductsGrid />
         <PaginationButtons
           v-if="productsResponse?.pagination"
@@ -111,3 +116,29 @@ watch(
   { immediate: true },
 );
 </script>
+<style scoped>
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-enter-from {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+.fade-leave-to {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+</style>

@@ -9,9 +9,7 @@
     </div>
     <div
       class="transition-all duration-300 ease-out"
-      :class="
-        isFilterOpen ? 'mt-2 max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-      "
+      :class="isFilterOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'"
     >
       <slot />
     </div>
