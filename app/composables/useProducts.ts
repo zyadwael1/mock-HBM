@@ -1,10 +1,13 @@
 import { type ProductsResponse } from "../types/types";
+
 export function useProducts() {
-  const productsResponse = ref();
+  const productsResponse = ref<ProductsResponse>();
 
   const route = useRoute();
 
   const fetchProducts = async () => {
+    productsResponse.value = undefined;
+
     const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products?";
     let queryString = "";
 

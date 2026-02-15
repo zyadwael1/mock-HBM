@@ -2,29 +2,43 @@
   <div
     class="flex flex-row flex-wrap justify-center gap-4 md:justify-center md:gap-7 md:px-48 md:py-9"
   >
-    <Card
-      v-for="product in productsResponse?.data"
-      :key="product.id"
-      :brand="product.brand.title"
-      :title="product.title"
-      :image="product.featured_image"
-    >
-      <template v-if="product.best_seller" #best_seller>
-        <span>Best Seller</span>
-      </template>
-      <template #product-info>
-        <div class="flex flex-row items-center justify-between">
-          <div>
-            <Rating :rating="product.rating.total_reviews_count" />
-            <Price :price="product.price" />
+    <template v-if="!products">
+      <div
+        v-for="_ in 10"
+        class="flex min-h-[260px] w-[154px] flex-col gap-3 rounded-xl bg-gray-400 md:min-h-[420px] md:w-[250px]"
+      ></div>
+    </template>
+    <template v-else-if="products.length === 0">
+      <h2>We couldn't find an exact match to what you are looking for.</h2>
+    </template>
+    <template v-else>
+      <Card
+        v-for="product in products"
+        :key="product.id"
+        :brand="product.brand.title"
+        :title="product.title"
+        :image="product.featured_image"
+      >
+        <template v-if="product.best_seller" #best_seller>
+          <span>Best Seller</span>
+        </template>
+        <template #product-info>
+          <div class="flex flex-row items-center justify-between">
+            <div>
+              <Rating :rating="product.rating.total_reviews_count" />
+              <Price :price="product.price" />
+            </div>
+            <Cart />
           </div>
-          <Cart />
-        </div>
-      </template>
-    </Card>
+        </template>
+      </Card>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-const { productsResponse } = useProducts();
+import type { ProductType } from "~/types/types";
+
+defineProps<{ products?: ProductType[] }>();
+// const products = computed(() => productsResponse.value?.data);
 </script>
