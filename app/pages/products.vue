@@ -1,12 +1,9 @@
 <template>
   <div class="flex flex-col px-8 md:px-16 md:py-8">
     <div class="flex items-center justify-between py-5 md:px-40">
-      <div class="text-2xl font-semibold md:text-4xl">
-        <h2 v-if="selectedCategory?.title">
-          {{ selectedCategory?.title }}
-        </h2>
-        <h2 v-else>All Products</h2>
-      </div>
+      <h2 class="text-2xl font-semibold md:text-4xl">
+        {{ selectedCategory?.title ?? "All Products" }}
+      </h2>
       <span>
         {{ productsResponse?.pagination.total }} Item
         {{ productsResponse?.pagination.total !== 1 ? "s" : "" }}
@@ -16,36 +13,17 @@
     <Sort class="my-5 self-end md:mx-40" />
 
     <div class="flex flex-col gap-4 md:flex-row">
-      <div class="flex">
-        <Transition name="fade">
-          <Drawer
-            v-if="isDrawerOpen"
-            class="flex flex-col gap-7 px-5"
-            :open="isDrawerOpen"
-            @close="toggleDrawer"
-          >
-            <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
-            <hr class="md:hidden" />
-            <FilterPart title="Brands"> Brands </FilterPart>
-            <hr />
-            <FilterPart :title="'Price'"> Price </FilterPart>
-            <hr />
-            <FilterPart :title="'Rating'"> Rating </FilterPart>
-            <hr />
-            <FilterPart :title="'Special Tags'"> Special Tags </FilterPart>
-          </Drawer>
-        </Transition>
+      <FiltersSidebar :is-open="isDrawerOpen" @close="toggleDrawer" />
 
-        <button class="flex" @click="toggleDrawer">
+      <div class="flex flex-col">
+        <button class="flex items-center" @click="toggleDrawer">
           <Icon
-            name="i:ic-filter"
             class="cursor-pointer text-2xl text-black md:text-3xl"
+            :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
           />
           <span class="px-3">Filters</span>
         </button>
-      </div>
 
-      <div>
         <Grid :products="productsResponse?.data" />
         <PaginationButtons
           v-if="productsResponse?.pagination"
@@ -59,8 +37,11 @@
 </template>
 
 <script setup lang="ts">
+import FiltersSidebar from "~/components/products/Filters/Sidebar.vue";
+
 const { productsResponse } = useProducts();
 const { selectedCategory } = useCategories();
+
 const router = useRouter();
 const route = useRoute();
 
