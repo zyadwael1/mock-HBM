@@ -59,6 +59,11 @@ export type ProductsResponse = {
   };
 };
 
+export type Rating = {
+  product_ratings: number; // e.g., 5, 4.3, 0
+  total_reviews_count: number; // e.g., 2, 4, 0
+};
+
 export type ProductType = {
   id: string;
   title: string;
@@ -71,10 +76,7 @@ export type ProductType = {
   is_in_stock: boolean;
   featured_image: string;
   second_image: string;
-  rating: {
-    product_ratings: number; // e.g., 5, 4.3, 0
-    total_reviews_count: number; // e.g., 2, 4, 0
-  };
+  rating: Rating;
   can_review: boolean;
   trendy: number; // 0 or 1
   best_seller: number; // 0 or 1
