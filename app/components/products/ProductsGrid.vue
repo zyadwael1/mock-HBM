@@ -5,7 +5,7 @@
     <template v-if="!products">
       <div
         v-for="_ in 10"
-        class="flex min-h-[260px] w-[154px] flex-col gap-3 rounded-xl bg-gray-200 md:min-h-[420px] md:w-[250px]"
+        class="flex min-h-[260px] w-[154px] animate-pulse flex-col gap-3 rounded-xl bg-gray-200 md:min-h-[420px] md:w-[250px]"
       ></div>
     </template>
     <div v-else-if="products.length === 0">
@@ -37,6 +37,13 @@
 </template>
 
 <script setup lang="ts">
-const { productsResponse } = useProducts();
-const products = computed(() => productsResponse?.value?.data);
+import type { ProductType } from '~/types/types';
+
+defineProps<{products?: ProductType[]}>()
+
+
+
+
+// const { productsResponse } = useProducts();
+// const products = computed(() => productsResponse?.value?.data);
 </script>
