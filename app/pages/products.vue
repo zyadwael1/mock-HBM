@@ -13,7 +13,7 @@
     <div class="flex flex-col gap-4 md:flex-row">
       <FiltersSidebar :brands :is-open="isDrawerOpen" @close="toggleDrawer" />
 
-      <div class="flex flex-col">
+      <div class="flex grow flex-col">
         <div class="flex items-center justify-between">
           <button class="flex items-center" @click="toggleDrawer">
             <Icon
@@ -41,7 +41,7 @@
 <script setup lang="ts">
 import FiltersSidebar from "~/components/products/Filters/Sidebar.vue";
 
-const { productsResponse } = useProducts();
+const { productsResponse, fetchProducts } = useProducts();
 const { selectedCategory } = useCategories();
 const { brands } = useBrands();
 
@@ -60,6 +60,8 @@ const toggleDrawer = async () => {
     },
   });
 };
+
+fetchProducts();
 </script>
 
 <style scoped>

@@ -29,15 +29,18 @@ export function useProducts() {
       queryString += `&filter[brands]=${route.query.brand}`;
     }
 
-    return await $fetch<ProductsResponse>(`${baseUrl}${queryString}`);
+    productsResponse.value = await $fetch<ProductsResponse>(
+      `${baseUrl}${queryString}`,
+    );
   };
 
   watch(
     () => route.query,
-    async () => {
-      productsResponse.value = await fetchProducts();
+    (newValue, oldValue) => {
+      if (newValue.filter_bar === oldValue?.filter_bar) {
+        fetchProducts();
+      }
     },
-    { immediate: true },
   );
 
   return { productsResponse, fetchProducts };
