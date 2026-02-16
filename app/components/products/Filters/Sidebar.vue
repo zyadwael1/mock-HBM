@@ -2,27 +2,33 @@
   <Transition name="fade">
     <Drawer
       v-if="isOpen"
-      class="flex min-w-80 flex-col gap-7 px-5"
+      class="flex min-w-80 flex-col gap-7 py-40"
       :open="isOpen"
       @close="$emit('close')"
     >
       <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
       <hr class="md:hidden" />
-      <FilterPart title="Brands"> Brands </FilterPart>
+      <Brands :brands />
       <hr />
-      <FilterPart :title="'Price'"> Price </FilterPart>
+      <Accordion title="Price"> Price </Accordion>
       <hr />
-      <FilterPart :title="'Rating'"> Rating </FilterPart>
+      <Accordion title="Rating"> Rating </Accordion>
       <hr />
-      <FilterPart :title="'Special Tags'"> Special Tags </FilterPart>
+      <Accordion title="Special Tags"> Special Tags </Accordion>
     </Drawer>
   </Transition>
 </template>
 
 <script setup lang="ts">
+import Accordion from "~/components/common/Accordion.vue";
+import type { Brand } from "~/types/products/brands";
+
 defineEmits<{
   close: [];
 }>();
 
-defineProps<{ isOpen?: boolean }>();
+defineProps<{
+  isOpen?: boolean;
+  brands?: Brand[];
+}>();
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col px-8 md:px-16 md:py-8">
-    <div class="flex items-center justify-between py-5 md:px-40">
+  <div class="flex flex-col gap-6 px-8 py-5 md:px-40">
+    <div class="flex items-center justify-between">
       <h2 class="text-2xl font-semibold md:text-4xl">
         {{ selectedCategory?.title ?? "All Products" }}
       </h2>
@@ -10,19 +10,21 @@
       </span>
     </div>
 
-    <Sort class="my-5 self-end md:mx-40" />
-
     <div class="flex flex-col gap-4 md:flex-row">
-      <FiltersSidebar :is-open="isDrawerOpen" @close="toggleDrawer" />
+      <FiltersSidebar :brands :is-open="isDrawerOpen" @close="toggleDrawer" />
 
       <div class="flex flex-col">
-        <button class="flex items-center" @click="toggleDrawer">
-          <Icon
-            class="cursor-pointer text-2xl text-black md:text-3xl"
-            :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
-          />
-          <span class="px-3">Filters</span>
-        </button>
+        <div class="flex items-center justify-between">
+          <button class="flex items-center" @click="toggleDrawer">
+            <Icon
+              class="cursor-pointer text-2xl text-black md:text-3xl"
+              :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
+            />
+            <span class="px-3">Filters</span>
+          </button>
+
+          <Sort />
+        </div>
 
         <Grid :products="productsResponse?.data" />
         <PaginationButtons
@@ -41,6 +43,7 @@ import FiltersSidebar from "~/components/products/Filters/Sidebar.vue";
 
 const { productsResponse } = useProducts();
 const { selectedCategory } = useCategories();
+const { brands } = useBrands();
 
 const router = useRouter();
 const route = useRoute();

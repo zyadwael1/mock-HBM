@@ -1,5 +1,5 @@
 <template>
-  <div class="text-lg">
+  <div class="flex flex-col">
     <div class="flex cursor-pointer justify-between" @click="handleFilter">
       <h3>{{ title }}</h3>
       <Icon
@@ -8,7 +8,7 @@
       />
     </div>
     <div
-      class="transition-all duration-300 ease-out"
+      class="flex transition-all duration-300 ease-out"
       :class="isFilterOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'"
     >
       <slot />
