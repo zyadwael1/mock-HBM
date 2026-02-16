@@ -5,7 +5,7 @@
   >
     <Icon
       name="i:ic-x"
-      class="self-end py-8 text-2xl text-black md:py-0 md:text-3xl"
+      class="cursor-pointer self-end py-8 text-2xl text-black md:py-0 md:text-3xl"
       @click="handleClose"
     />
 
@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 defineProps<{ open: boolean }>();
-const emit = defineEmits<{ (e: "update:open", value: boolean): void }>();
-const handleClose = () => emit("update:open", false);
+
+const emit = defineEmits<{ (e: "close"): void }>();
+const handleClose = () => emit("close");
 </script>

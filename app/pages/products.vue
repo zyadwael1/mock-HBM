@@ -8,10 +8,9 @@
         <h2 v-else>All Products</h2>
       </div>
       <span
-        >{{ productsResponse?.pagination.total }} Item{{
-          productsResponse?.pagination.total !== 1 ? "s" : ""
-        }}</span
-      >
+        >{{ productsResponse?.pagination.total }} Item
+        {{ productsResponse?.pagination.total !== 1 ? "s" : "" }}
+      </span>
     </div>
 
     <Sort class="my-5 self-end md:mx-40" />
@@ -21,8 +20,9 @@
         <Transition name="fade">
           <Drawer
             v-if="isDrawerOpen"
-            v-model:open="isDrawerOpen"
             class="flex flex-col gap-7 px-5"
+            :open="isDrawerOpen"
+            @close="toggleDrawer"
           >
             <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
             <hr class="md:hidden" />
@@ -36,17 +36,17 @@
           </Drawer>
         </Transition>
 
-        <Icon
-          v-if="!isDrawerOpen"
-          name="i:ic-filter"
-          class="text-2xl text-black md:text-3xl"
-          @click="handleDrawer"
-        />
-        <span class="px-3">Filters</span>
+        <button class="flex" @click="toggleDrawer">
+          <Icon
+            name="i:ic-filter"
+            class="cursor-pointer text-2xl text-black md:text-3xl"
+          />
+          <span class="px-3">Filters</span>
+        </button>
       </div>
 
       <div>
-        <ProductsGrid :products="productsResponse?.data" />
+        <Grid :products="productsResponse?.data" />
         <PaginationButtons
           v-if="productsResponse?.pagination"
           :current-page="productsResponse.pagination.current_page"
@@ -61,67 +61,24 @@
 <script setup lang="ts">
 import { type CategoryState } from "~/types/types";
 const { productsResponse } = useProducts();
-const { categoriesResponse } = useCategories();
 
 const selectedCategory = useState<CategoryState | null>("selectedCategory");
 const router = useRouter();
 const route = useRoute();
-const isDrawerOpen = ref<boolean>(false);
 
-const handleDrawer = async () => {
-  const newState = !isDrawerOpen.value;
-  await router.push({
+const isDrawerOpen = computed(() => !!route.query.filter_bar);
+
+const toggleDrawer = async () => {
+  router.push({
     path: route.path,
     query: {
       ...route.query,
-      filter_bar: newState ? "true" : undefined,
+      filter_bar: isDrawerOpen.value ? undefined : "true",
     },
   });
 };
-
-// Sync isDrawerOpen changes to URL
-watch(isDrawerOpen, async (newValue) => {
-  const currentFilterBar = route.query.filter_bar === "true";
-  if (newValue !== currentFilterBar) {
-    await router.push({
-      path: route.path,
-      query: {
-        ...route.query,
-        filter_bar: newValue ? "true" : undefined,
-      },
-    });
-  }
-});
-
-// Sync URL changes to isDrawerOpen
-watch(
-  () => route.query.filter_bar,
-  (filterBarQuery) => {
-    isDrawerOpen.value = filterBarQuery === "true";
-  },
-  { immediate: true },
-);
-
-watch(
-  () => route.query.category,
-  (categoryId) => {
-    if (!categoryId) {
-      selectedCategory.value = null;
-    } else {
-      const category = categoriesResponse.value?.data.find(
-        (cat) => cat.id === categoryId,
-      );
-      if (category) {
-        selectedCategory.value = {
-          id: category.id,
-          title: category.title,
-        };
-      }
-    }
-  },
-  { immediate: true },
-);
 </script>
+
 <style scoped>
 /*
   Enter and leave animations can use different
