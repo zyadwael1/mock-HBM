@@ -1,5 +1,5 @@
 <template>
-  <main
+  <div
     class="flex min-h-[260px] w-[154px] flex-col gap-3 rounded-xl md:min-h-[420px] md:w-[250px]"
   >
     <div class="relative">
@@ -25,7 +25,7 @@
       <h3 class="w-full truncate">{{ title }}</h3>
       <slot name="product-info" />
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
