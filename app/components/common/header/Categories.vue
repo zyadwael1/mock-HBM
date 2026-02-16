@@ -8,11 +8,11 @@
       <NuxtLink
         v-for="category in categoriesResponse?.data"
         class="text-nowrap"
+        :key="category.id"
         :to="{
           path: '/products',
           query: { category: category.id },
         }"
-        :key="category.id"
         @click="selectCategory(category)"
       >
         {{ category.title }}
@@ -22,39 +22,22 @@
 </template>
 
 <script setup lang="ts">
-import { boolean } from "zod";
-import { type CategoryState } from "~/types/types";
+import { type CategoryType } from "~/types/types";
 
 const { categoriesResponse } = useCategories();
-const selectedCategory = useState<CategoryState | null>("selectedCategory");
 
-const per_page = categoriesResponse.value?.pagination.per_page;
-const current_page = categoriesResponse.value?.pagination.current_page;
 const router = useRouter();
-const route = useRoute();
 
-// Try spreading
-// const routeQueries = {
-//   per_page: per_page,
-//   page: current_page,
-//   category: selectedCategory.value?.id,
-// };
-
-const selectCategory = async (category: CategoryState) => {
-  selectedCategory.value = {
-    id: category.id,
-    title: category.title,
-  };
-  await router.push({
+const selectCategory = async (category: CategoryType) => {
+  router.push({
     path: "/products",
     query: {
-      per_page: per_page,
-      page: current_page,
-      category: selectedCategory.value.id,
+      category: category.id,
     },
   });
 };
 </script>
+
 <style scoped>
 .hide-scroll-bar::-webkit-scrollbar {
   display: none;

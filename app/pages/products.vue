@@ -7,8 +7,8 @@
         </h2>
         <h2 v-else>All Products</h2>
       </div>
-      <span
-        >{{ productsResponse?.pagination.total }} Item
+      <span>
+        {{ productsResponse?.pagination.total }} Item
         {{ productsResponse?.pagination.total !== 1 ? "s" : "" }}
       </span>
     </div>
@@ -26,7 +26,7 @@
           >
             <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
             <hr class="md:hidden" />
-            <FilterPart :title="'Brands'"> Brands </FilterPart>
+            <FilterPart title="Brands"> Brands </FilterPart>
             <hr />
             <FilterPart :title="'Price'"> Price </FilterPart>
             <hr />
@@ -59,16 +59,15 @@
 </template>
 
 <script setup lang="ts">
-import { type CategoryState } from "~/types/types";
 const { productsResponse } = useProducts();
-
-const selectedCategory = useState<CategoryState | null>("selectedCategory");
+const { selectedCategory } = useCategories();
 const router = useRouter();
 const route = useRoute();
 
 const isDrawerOpen = computed(() => !!route.query.filter_bar);
 
 const toggleDrawer = async () => {
+  isDrawerOpen.value != isDrawerOpen.value;
   router.push({
     path: route.path,
     query: {
