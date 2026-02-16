@@ -1,9 +1,10 @@
 import { type ProductsResponse } from "../types/types";
 export function useProducts() {
-  const productsResponse = ref();
+    const productsResponse = ref<ProductsResponse | null>(null);
 
+  
   const route = useRoute();
-
+  
   const fetchProducts = async () => {
     const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products?";
     let queryString = "";
@@ -28,6 +29,7 @@ export function useProducts() {
   watch(
     () => route.query,
     async () => {
+      productsResponse.value = null
       productsResponse.value = await fetchProducts();
     },
     { immediate: true },
