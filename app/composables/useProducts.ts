@@ -22,6 +22,9 @@ export function useProducts() {
     if (route.query.sort) {
       queryString += `&sort=${route.query.sort}`;
     }
+    if (route.query.brand) {
+      queryString += `&filter[brand]=${route.query.brand}`;
+    }
 
     productsResponse.value = await $fetch<ProductsResponse>(
       `${baseUrl}${queryString}`,
