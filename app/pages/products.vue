@@ -43,7 +43,7 @@
         <span class="px-3">Filters</span>
       </div>
       <div>
-        <ProductsGrid :products="productsResponse?.data"/>
+        <Grid :products="productsResponse?.data"/>
         <PaginationButtons
           v-if="productsResponse?.pagination"
           :current-page="productsResponse.pagination.current_page"

@@ -6,7 +6,5 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  rating: Number,
-});
+defineProps<{rating: number}>()
 </script>
