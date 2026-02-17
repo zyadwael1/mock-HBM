@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-const { productsResponse } = useProducts();
+const { productsResponse, fetchProducts } = useProducts();
 const { selectedCategory } = useCategories();
 
 const router = useRouter();
@@ -56,6 +56,7 @@ const handleDrawer = () => {
     },
   });
 };
+fetchProducts();
 </script>
 <style scoped>
 /*

@@ -1,12 +1,11 @@
 import { type ProductsResponse } from "../types/types";
 export function useProducts() {
-    const productsResponse = ref<ProductsResponse>();
+  const productsResponse = ref<ProductsResponse>();
 
-  
   const route = useRoute();
-  
+
   const fetchProducts = async () => {
-    productsResponse.value = undefined
+    productsResponse.value = undefined;
     const baseUrl = "https://fillcart.staging.hbm.studio/api/v2/products?";
     let queryString = "";
 
@@ -24,15 +23,18 @@ export function useProducts() {
       queryString += `&sort=${route.query.sort}`;
     }
 
-    return await $fetch<ProductsResponse>(`${baseUrl}${queryString}`);
+    productsResponse.value = await $fetch<ProductsResponse>(
+      `${baseUrl}${queryString}`,
+    );
   };
 
   watch(
     () => route.query,
-    async () => {
-      productsResponse.value = await fetchProducts();
+    (newValue, oldValue) => {
+      if (newValue.filter_bar === oldValue?.filter_bar) {
+        fetchProducts();
+      }
     },
-    { immediate: true },
   );
 
   return { productsResponse, fetchProducts };
