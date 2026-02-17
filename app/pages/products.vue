@@ -19,23 +19,23 @@
         <Transition name="fade">
           <Drawer
             v-if="isDrawerOpen"
-            v-model:open="isDrawerOpen"
+            :open="isDrawerOpen"
+            @close="handleDrawer"
             class="flex flex-col gap-7 px-5"
           >
             <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
             <hr class="md:hidden" />
-            <FilterPart :title="'Brands'"> Brands </FilterPart>
+            <FilterPart title="Brands"> Brands </FilterPart>
             <hr />
-            <FilterPart :title="'Price'"> Price </FilterPart>
+            <FilterPart title="Price"> Price </FilterPart>
             <hr />
-            <FilterPart :title="'Rating'"> Rating </FilterPart>
+            <FilterPart title="Rating"> Rating </FilterPart>
             <hr />
-            <FilterPart :title="'Special Tags'"> Special Tags </FilterPart>
+            <FilterPart title="Special Tags"> Special Tags </FilterPart>
           </Drawer>
         </Transition>
 
         <Icon
-          v-if="!isDrawerOpen"
           name="i:ic-filter"
           class="text-2xl text-black md:text-3xl"
           @click="handleDrawer"
@@ -43,7 +43,7 @@
         <span class="px-3">Filters</span>
       </div>
       <div>
-        <Grid :products="productsResponse?.data"/>
+        <Grid :products="productsResponse?.data" />
         <PaginationButtons
           v-if="productsResponse?.pagination"
           :current-page="productsResponse.pagination.current_page"
@@ -60,43 +60,23 @@ import { type CategoryState } from "~/types/types";
 const { productsResponse } = useProducts();
 const { categoriesResponse } = useCategories();
 const selectedCategory = useState<CategoryState | null>("selectedCategory");
+
 const router = useRouter();
 const route = useRoute();
-const isDrawerOpen = ref<boolean>(false);
 
-const handleDrawer = async () => {
-  const newState = !isDrawerOpen.value;
-  await router.push({
+const isDrawerOpen = computed(() => !!route.query.filter_bar);
+
+const handleDrawer = () => {
+  router.push({
     path: route.path,
     query: {
       ...route.query,
-      filter_bar: newState ? "true" : undefined,
+      filter_bar: isDrawerOpen.value ? undefined : "true",
     },
   });
 };
 
-// Sync isDrawerOpen changes to URL
-watch(isDrawerOpen, async (newValue) => {
-  const currentFilterBar = route.query.filter_bar === "true";
-  if (newValue !== currentFilterBar) {
-    await router.push({
-      path: route.path,
-      query: {
-        ...route.query,
-        filter_bar: newValue ? "true" : undefined,
-      },
-    });
-  }
-});
 
-// Sync URL changes to isDrawerOpen
-watch(
-  () => route.query.filter_bar,
-  (filterBarQuery) => {
-    isDrawerOpen.value = filterBarQuery === "true";
-  },
-  { immediate: true },
-);
 
 watch(
   () => route.query.category,
