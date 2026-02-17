@@ -19,15 +19,28 @@
         @close="handleDrawer"
       />
       <div class="flex grow flex-col">
-        <div class="flex items-center justify-between py-5 px-0 md:px-20">
-          <button class="flex items-center" @click="handleDrawer">
-            <Icon
-              class="cursor-pointer text-2xl text-black md:text-3xl"
-              :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
-            />
-            <span class="px-3">Filters</span>
-          </button>
-          <Sort />
+        <div class="flex items-center justify-between px-0 py-5 md:px-20">
+          <div class="flex items-center">
+            <button class="flex items-center" @click="handleDrawer">
+              <Icon
+                class="cursor-pointer text-2xl text-black md:text-3xl"
+                :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
+              />
+              <span class="px-3"
+                >Filters{{
+                  selectedBrandsCount ? ` (${selectedBrandsCount})` : ""
+                }}</span
+              >
+            </button>
+            <Active :brands />
+          </div>
+          <div class="flex gap-5">
+            <button class="border-l-2 px-5 py-2" @click="clearAllBrands">
+              Clear All
+            </button>
+
+            <Sort />
+          </div>
         </div>
 
         <Grid
@@ -65,6 +78,23 @@ const handleDrawer = () => {
     },
   });
 };
+
+const selectedBrandsCount = computed(() => {
+  const brands = route.query.brands;
+  if (!brands) return 0;
+  return Array.isArray(brands) ? brands.length : 1;
+});
+
+const clearAllBrands = () => {
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      brands: undefined,
+    },
+  });
+};
+
 fetchProducts();
 </script>
 <style scoped>

@@ -10,3 +10,4 @@ export function useBrands() {
   const { data: brands } = useAsyncData(fetchBrands);
   return { brands };
 }
+  

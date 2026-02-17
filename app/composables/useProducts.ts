@@ -10,7 +10,7 @@ export function useProducts() {
     let queryString = "";
 
     if (route.query.per_page) {
-      queryString += `?per_page=${route.query.per_page}`;
+      queryString += `per_page=${route.query.per_page}`;
     }
 
     if (route.query.page) {
@@ -22,8 +22,8 @@ export function useProducts() {
     if (route.query.sort) {
       queryString += `&sort=${route.query.sort}`;
     }
-    if (route.query.brand) {
-      queryString += `&filter[brand]=${route.query.brand}`;
+    if (route.query.brands) {
+      queryString += `&filter[brands]=${route.query.brands}`;
     }
 
     productsResponse.value = await $fetch<ProductsResponse>(

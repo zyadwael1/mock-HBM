@@ -6,6 +6,7 @@
       :open="isOpen"
       @close="$emit('close')"
     >
+      <!-- X button for Mobile -->
       <div class="flex justify-between py-5 md:hidden">
         <h2 class="text-xl font-semibold">Filter by</h2>
         <button class="flex items-center" @click="$emit('close')">
@@ -15,6 +16,7 @@
           />
         </button>
       </div>
+
       <hr class="md:hidden" />
       <Brands :brands />
       <hr />
