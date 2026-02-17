@@ -16,24 +16,7 @@
     <Sort class="my-5 self-end md:mx-40" />
     <div class="flex flex-col gap-4 md:flex-row">
       <div class="flex">
-        <Transition name="fade">
-          <Drawer
-            v-if="isDrawerOpen"
-            :open="isDrawerOpen"
-            @close="handleDrawer"
-            class="flex flex-col gap-7 px-5"
-          >
-            <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
-            <hr class="md:hidden" />
-            <FilterPart title="Brands"> Brands </FilterPart>
-            <hr />
-            <FilterPart title="Price"> Price </FilterPart>
-            <hr />
-            <FilterPart title="Rating"> Rating </FilterPart>
-            <hr />
-            <FilterPart title="Special Tags"> Special Tags </FilterPart>
-          </Drawer>
-        </Transition>
+        <Sidebar :is-open="isDrawerOpen" @close="handleDrawer" />
 
         <Icon
           name="i:ic-filter"
