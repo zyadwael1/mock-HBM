@@ -25,17 +25,15 @@
 import { boolean } from "zod";
 import { type CategoryType } from "~/types/types";
 
-const { categoriesResponse} = useCategories();
+const { categoriesResponse } = useCategories();
 
 const router = useRouter();
 
-
 const selectCategory = async (category: CategoryType) => {
-
   await router.push({
     path: "/products",
     query: {
-      category: category.id
+      category: category.id,
     },
   });
 };

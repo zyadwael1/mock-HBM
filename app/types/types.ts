@@ -40,7 +40,6 @@ export type CategoryType = {
   parent_category?: any;
 };
 
-
 // ===== PRODUCTS TYPES (CORRECTED) =====
 export type ProductsResponse = {
   meta: {
