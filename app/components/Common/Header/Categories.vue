@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import { boolean } from "zod";
 import { type CategoryType } from "~/types/types";
 
 const { categoriesResponse } = useCategories();

@@ -11,9 +11,33 @@
     >
       <button
         class="flex h-8 w-8 shrink-0 items-center justify-center sm:hidden"
+        @click="toggleMenu"
       >
         <Icon size="24px" name="i:ic-menu"></Icon>
       </button>
+
+      <Drawer class="flex flex-col md:hidden" :open="isOpen">
+        <button class=" self-end" @click="toggleMenu">
+          <Icon
+            class="cursor-pointer text-2xl text-black md:text-3xl"
+            name="i:ic-x"
+          />
+        </button>
+        <NuxtLink
+          v-for="category in categoriesResponse?.data"
+          class="flex flex-col  items-start px-3 py-3"
+          :to="{
+            path: '/products',
+            query: { category: category.id },
+          }"
+          :key="category.id"
+          @click="selectCategory(category)"
+        >
+          {{ category.title }}
+        </NuxtLink>
+        
+      </Drawer>
+
       <input
         type="search"
         placeholder="Search"
@@ -26,3 +50,24 @@
     </div>
   </header>
 </template>
+<script setup lang="ts">
+import { type CategoryType } from "~/types/types";
+
+const { categoriesResponse } = useCategories();
+const isOpen = ref(false);
+
+const router = useRouter();
+
+const selectCategory = async (category: CategoryType) => {
+  await router.push({
+    path: "/products",
+    query: {
+      category: category.id,
+    },
+  });
+  isOpen.value = false;
+};
+const toggleMenu = () => {
+  isOpen.value = !isOpen.value;
+};
+</script>
