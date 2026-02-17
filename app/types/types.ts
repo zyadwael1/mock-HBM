@@ -39,10 +39,7 @@ export type CategoryType = {
   breadcrumbs_image: string;
   parent_category?: any;
 };
-export type CategoryState = {
-  id: string;
-  title: string;
-};
+
 
 // ===== PRODUCTS TYPES (CORRECTED) =====
 export type ProductsResponse = {

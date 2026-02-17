@@ -56,10 +56,8 @@
 </template>
 
 <script setup lang="ts">
-import { type CategoryState } from "~/types/types";
 const { productsResponse } = useProducts();
-const { categoriesResponse } = useCategories();
-const selectedCategory = useState<CategoryState | null>("selectedCategory");
+const { selectedCategory } = useCategories();
 
 const router = useRouter();
 const route = useRoute();
@@ -75,28 +73,6 @@ const handleDrawer = () => {
     },
   });
 };
-
-
-
-watch(
-  () => route.query.category,
-  (categoryId) => {
-    if (!categoryId) {
-      selectedCategory.value = null;
-    } else {
-      const category = categoriesResponse.value?.data.find(
-        (cat) => cat.id === categoryId,
-      );
-      if (category) {
-        selectedCategory.value = {
-          id: category.id,
-          title: category.title,
-        };
-      }
-    }
-  },
-  { immediate: true },
-);
 </script>
 <style scoped>
 /*

@@ -23,34 +23,19 @@
 
 <script setup lang="ts">
 import { boolean } from "zod";
-import { type CategoryState } from "~/types/types";
+import { type CategoryType } from "~/types/types";
 
-const { categoriesResponse } = useCategories();
-const selectedCategory = useState<CategoryState | null>("selectedCategory");
+const { categoriesResponse} = useCategories();
 
-const per_page = categoriesResponse.value?.pagination.per_page;
-const current_page = categoriesResponse.value?.pagination.current_page;
 const router = useRouter();
-const route = useRoute();
 
-// Try spreading
-// const routeQueries = {
-//   per_page: per_page,
-//   page: current_page,
-//   category: selectedCategory.value?.id,
-// };
 
-const selectCategory = async (category: CategoryState) => {
-  selectedCategory.value = {
-    id: category.id,
-    title: category.title,
-  };
+const selectCategory = async (category: CategoryType) => {
+
   await router.push({
     path: "/products",
     query: {
-      per_page: per_page,
-      page: current_page,
-      category: selectedCategory.value.id,
+      category: category.id
     },
   });
 };

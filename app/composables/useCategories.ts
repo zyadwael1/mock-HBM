@@ -1,7 +1,14 @@
 import { type CategoriesResponse } from "../types/types";
 export function useCategories() {
+  const route = useRoute();
   const { data: categoriesResponse } = useFetch<CategoriesResponse>(
     "https://fillcart.staging.hbm.studio/api/v2/categories?include=media",
   );
-  return { categoriesResponse };
+  const selectedCategory = computed(() =>
+    categoriesResponse.value?.data.find(
+      (cat) => cat.id === route.query.category,
+    ),
+  );
+
+  return { categoriesResponse, selectedCategory };
 }
