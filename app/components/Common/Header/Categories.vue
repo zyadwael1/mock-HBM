@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hidden h-[49px] items-center justify-center overflow-hidden border-y-[0.5px] border-[#DFE1E3] bg-light-gray md:flex"
+    class="hidden h-[49px] items-center justify-center overflow-hidden border-y-[0.5px] border-[#DFE1E3] bg-light-gray sm:flex"
   >
     <ul
       class="hide-scroll-bar flex w-[80%] justify-around gap-12 overflow-x-scroll"

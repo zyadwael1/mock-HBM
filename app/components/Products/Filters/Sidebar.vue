@@ -6,20 +6,33 @@
       :open="isOpen"
       @close="$emit('close')"
     >
-      <h2 class="text-xl font-semibold md:hidden">Filter by</h2>
+      <div class="flex justify-between py-5 md:hidden">
+        <h2 class="text-xl font-semibold">Filter by</h2>
+        <button class="flex items-center" @click="$emit('close')">
+          <Icon
+            class="cursor-pointer text-2xl text-black md:text-3xl"
+            name="i:ic-x"
+          />
+        </button>
+      </div>
       <hr class="md:hidden" />
-      <FilterPart title="Brands"> Brands </FilterPart>
+      <Brands :brands />
       <hr />
-      <FilterPart title="Price"> Price </FilterPart>
+      <Accordion title="Price"> Price </Accordion>
       <hr />
-      <FilterPart title="Rating"> Rating </FilterPart>
+      <Accordion title="Rating"> Rating </Accordion>
       <hr />
-      <FilterPart title="Special Tags"> Special Tags </FilterPart>
+      <Accordion title="Special Tags"> Special Tags </Accordion>
     </Drawer>
   </Transition>
 </template>
 
 <script setup lang="ts">
+import type { Brand } from "~/types/brands";
+
 defineEmits<{ close: [] }>();
-defineProps<{ isOpen: boolean }>();
+defineProps<{
+  isOpen?: boolean;
+  brands?: Brand[];
+}>();
 </script>

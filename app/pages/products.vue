@@ -1,32 +1,39 @@
 <template>
   <div class="flex flex-col px-8 md:px-16 md:py-8">
-    <div class="flex items-center justify-between py-5 md:px-40">
-      <div class="text-2xl font-semibold md:text-4xl">
-        <h2 v-if="selectedCategory?.title">
-          {{ selectedCategory?.title }}
-        </h2>
-        <h2 v-else>All Products</h2>
-      </div>
+    <div class="flex items-center justify-between py-5 md:px-20">
+      <h2 class="text-2xl font-semibold md:text-4xl">
+        {{ selectedCategory?.title ?? "All Products" }}
+      </h2>
       <span
         >{{ productsResponse?.pagination.total }} Item{{
           productsResponse?.pagination.total !== 1 ? "s" : ""
         }}</span
       >
     </div>
-    <Sort class="my-5 self-end md:mx-40" />
-    <div class="flex flex-col gap-4 md:flex-row">
-      <div class="flex">
-        <Sidebar :is-open="isDrawerOpen" @close="handleDrawer" />
 
-        <Icon
-          name="i:ic-filter"
-          class="text-2xl text-black md:text-3xl"
-          @click="handleDrawer"
+    <div class="flex flex-col gap-4 md:flex-row">
+      <Sidebar
+        class="min-w-[350px] py-0 md:py-36"
+        :brands
+        :is-open="isDrawerOpen"
+        @close="handleDrawer"
+      />
+      <div class="flex grow flex-col">
+        <div class="flex items-center justify-between py-5 px-0 md:px-20">
+          <button class="flex items-center" @click="handleDrawer">
+            <Icon
+              class="cursor-pointer text-2xl text-black md:text-3xl"
+              :name="isDrawerOpen ? 'i:ic-x' : 'i:ic-filter'"
+            />
+            <span class="px-3">Filters</span>
+          </button>
+          <Sort />
+        </div>
+
+        <Grid
+          :products="productsResponse?.data"
+          :is-drawer-open="isDrawerOpen"
         />
-        <span class="px-3">Filters</span>
-      </div>
-      <div>
-        <Grid :products="productsResponse?.data" />
         <PaginationButtons
           v-if="productsResponse?.pagination"
           :current-page="productsResponse.pagination.current_page"
@@ -41,6 +48,8 @@
 <script setup lang="ts">
 const { productsResponse, fetchProducts } = useProducts();
 const { selectedCategory } = useCategories();
+
+const { brands } = useBrands();
 
 const router = useRouter();
 const route = useRoute();
