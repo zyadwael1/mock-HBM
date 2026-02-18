@@ -2,7 +2,7 @@
   <header
     class="flex flex-wrap items-center justify-between gap-2 p-4 text-black"
   >
-    <NuxtLink to="/" class="header-logo order-1 shrink-0">
+    <NuxtLink to="/" class="order-1 shrink-0">
       <img src="/assets/logo.png" alt="header-logo" />
     </NuxtLink>
 
@@ -16,16 +16,21 @@
         <Icon size="24px" name="i:ic-menu"></Icon>
       </button>
 
-      <Drawer class="flex flex-col md:hidden" :open="isOpen">
-        <button class=" self-end" @click="toggleMenu">
-          <Icon
-            class="cursor-pointer text-2xl text-black md:text-3xl"
-            name="i:ic-x"
-          />
-        </button>
+      <Drawer class="flex flex-col p-5 md:hidden" :open="isOpen">
+        <div class="flex justify-between">
+          <NuxtLink to="/">
+            <img src="/assets/logo.png" alt="header-logo" />
+          </NuxtLink>
+          <button class="self-end" @click="toggleMenu">
+            <Icon
+              class="cursor-pointer text-2xl text-black md:text-3xl"
+              name="i:ic-x"
+            />
+          </button>
+        </div>
         <NuxtLink
           v-for="category in categoriesResponse?.data"
-          class="flex flex-col  items-start px-3 py-3"
+          class="flex flex-col items-start border-t-2 px-3 py-4"
           :to="{
             path: '/products',
             query: { category: category.id },
@@ -35,7 +40,6 @@
         >
           {{ category.title }}
         </NuxtLink>
-        
       </Drawer>
 
       <input
@@ -66,8 +70,12 @@ const selectCategory = async (category: CategoryType) => {
     },
   });
   isOpen.value = false;
+  document.body.style.overflow = "";
 };
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
+  if (window.innerWidth < 768) {
+    document.body.style.overflow = isOpen.value ? "hidden" : "";
+  }
 };
 </script>

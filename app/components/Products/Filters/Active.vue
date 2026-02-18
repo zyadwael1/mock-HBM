@@ -1,12 +1,12 @@
 <template>
   <div
     v-if="selectedBrands.length"
-    class="flex flex-wrap gap-2 px-2 "
+    class="flex flex-nowrap gap-2 overflow-x-auto px-2"
   >
     <span
       v-for="brand in selectedBrands"
       :key="brand.id"
-      class="flex flex-row items-center gap-2 rounded bg-gray-100 p-2 hover:bg-gray-200"
+      class="flex flex-row items-center gap-2 whitespace-nowrap rounded bg-gray-100 p-2 hover:bg-gray-200"
     >
       {{ brand.title }}
       <button class="flex items-center" @click="clearBrand(brand.id)">
@@ -44,5 +44,4 @@ const clearBrand = (id: string) => {
     },
   });
 };
-
 </script>

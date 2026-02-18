@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { is } from "zod/locales";
 import type { Brand } from "~/types/brands";
 const route = useRoute();
 const router = useRouter();
@@ -31,18 +30,17 @@ const selectedBrands = computed(() => {
 
 const isSelected = (id: string) => selectedBrands.value.includes(String(id));
 
-
 const toggleBrand = (id: string) => {
   const updated = isSelected(id)
     ? selectedBrands.value.filter((brand) => brand !== id)
     : [...selectedBrands.value, id];
-    router.push({
-            path: route.path,
-            query: {
-              ...route.query,
-              brands: updated.length ? updated : undefined,
-            },
-          })
+  router.push({
+    path: route.path,
+    query: {
+      ...route.query,
+      brands: updated.length ? updated : undefined,
+    },
+  });
 };
 </script>
 
