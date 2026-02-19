@@ -43,5 +43,3 @@ const toggleBrand = (id: string) => {
   });
 };
 </script>
-
-<style scoped></style>

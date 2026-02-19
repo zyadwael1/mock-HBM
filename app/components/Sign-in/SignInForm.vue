@@ -1,5 +1,7 @@
 <template>
-  <div class="flex min-h-[492px] w-[600px] flex-col items-center justify-between">
+  <div
+    class="flex min-h-[492px] w-[600px] flex-col items-center justify-between"
+  >
     <div>
       <h2 class="text-4xl">Sign in</h2>
     </div>
@@ -42,7 +44,6 @@
 </template>
 
 <script setup lang="ts">
-
 const { togglePassword, passwordInputType, passwordInputIcon } =
   usePasswordToggle();
 
@@ -88,7 +89,6 @@ const signInManager = async () => {
 
   const validatedEmail = emailSchema.safeParse(formStates.value.email);
   const validatedPassword = passwordSchema.safeParse(formStates.value.password);
-
 
   if (!validatedEmail.success || !validatedPassword.success) {
     formStates.value = {

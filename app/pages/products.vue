@@ -134,7 +134,6 @@ fetchProducts();
   opacity: 1;
 }
 
-
 /* ... your existing animations ... */
 
 /* Only hide the scrollbar on screens smaller than 768px */
