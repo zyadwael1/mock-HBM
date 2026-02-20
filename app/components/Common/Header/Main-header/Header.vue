@@ -16,7 +16,7 @@
         <Icon size="24px" name="i:ic-menu"></Icon>
       </button>
 
-      <Drawer class="flex flex-col p-5 md:hidden" :open="isOpen">
+      <Drawer class="flex flex-col gap-3 p-5 md:hidden" :open="isOpen">
         <div class="flex justify-between">
           <NuxtLink to="/">
             <img src="/assets/logo.png" alt="header-logo" />
@@ -27,6 +27,21 @@
               name="i:ic-x"
             />
           </button>
+        </div>
+        <div class="flex justify-center gap-3 bg-green-100 py-1">
+          <NuxtLink
+            to="/sign-in"
+            class="hover:font-semibold"
+            @click="toggleMenu"
+            >Sign in</NuxtLink
+          >
+          /
+          <NuxtLink
+            to="/register"
+            class="hover:font-semibold"
+            @click="toggleMenu"
+            >Register</NuxtLink
+          >
         </div>
         <NuxtLink
           v-for="category in categoriesResponse?.data"
@@ -78,4 +93,7 @@ const toggleMenu = () => {
     document.body.style.overflow = isOpen.value ? "hidden" : "";
   }
 };
+// const toggleMenuSignInRegister = () => {
+//   isOpen.value = !isOpen.value;
+// };
 </script>
