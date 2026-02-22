@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex justify-center px-6 py-[64px]">
     <RegisterForm />
   </div>
 </template>

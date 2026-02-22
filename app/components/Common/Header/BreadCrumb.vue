@@ -1,5 +1,8 @@
 <template>
-  <nav v-if="route.path !== '/'" class="flex gap-2 text-sm">
+  <nav
+    v-if="route.path !== '/'"
+    class="flex gap-1 px-6 py-[10px] text-sm sm:px-12"
+  >
     <NuxtLink to="/">Home</NuxtLink>
 
     <template v-for="(crumb, index) in breadcrumbs" :key="index">

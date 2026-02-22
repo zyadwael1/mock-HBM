@@ -1,9 +1,9 @@
 <template>
   <div
-    class="hidden h-[49px] items-center justify-center overflow-hidden border-y-[0.5px] border-[#DFE1E3] bg-light-gray sm:flex"
+    class="hidden h-[49px] items-center justify-center overflow-hidden border-y-[0.5px] border-[#DFE1E3] bg-light-gray sm:flex sm:text-sm sm:font-semibold"
   >
     <ul
-      class="hide-scroll-bar flex w-[80%] justify-around gap-12 overflow-x-scroll"
+      class="hide-scroll-bar flex w-[80%] justify-around gap-12 overflow-x-scroll sm:w-[90%]"
     >
       <NuxtLink
         v-for="category in categoriesResponse?.data"

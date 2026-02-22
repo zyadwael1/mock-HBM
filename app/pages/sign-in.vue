@@ -1,7 +1,7 @@
 <template>
-  <main class="flex justify-center py-[64px]">
+  <div class="flex justify-center px-6 py-[64px]">
     <SignInForm />
-  </main>
+  </div>
 </template>
 <script setup lang="ts">
 definePageMeta({

@@ -1,16 +1,16 @@
 <template>
   <header
-    class="flex flex-wrap items-center justify-between gap-2 p-4 text-black"
+    class="flex flex-wrap items-center justify-between gap-2 px-4 py-1 text-black sm:px-10 sm:py-[18px]"
   >
-    <NuxtLink to="/" class="order-1 shrink-0">
+    <NuxtLink to="/" class="order-1 shrink-0 py-1">
       <img src="/assets/logo.png" alt="header-logo" />
     </NuxtLink>
 
     <div
-      class="order-3 flex w-full items-center justify-center gap-3 border-b-2 py-3 sm:order-2 sm:mx-2 sm:w-auto sm:flex-1 sm:border-0 sm:py-0"
+      class="order-3 flex w-full items-center justify-center gap-3 py-2 sm:order-2 sm:mx-2 sm:w-auto sm:flex-1 sm:py-0"
     >
       <button
-        class="flex h-8 w-8 shrink-0 items-center justify-center sm:hidden"
+        class="flex h-[30px] w-[30px] shrink-0 items-center justify-center sm:hidden"
         @click="toggleMenu"
       >
         <Icon size="24px" name="i:ic-menu"></Icon>
@@ -28,7 +28,7 @@
             />
           </button>
         </div>
-        <div class="flex justify-center gap-3 bg-green-100 py-1">
+        <div class="flex justify-center gap-3 bg-green-50 py-1">
           <NuxtLink
             to="/sign-in"
             class="hover:font-semibold"
@@ -60,13 +60,14 @@
       <input
         type="search"
         placeholder="Search"
-        class="h-[30px] w-full rounded-xl border border-border-gray bg-light-gray px-5 py-[18px] sm:h-[43px] sm:max-w-[823px]"
+        class="h-10 w-full rounded-xl border border-border-gray bg-light-gray px-5 py-[18px] sm:h-[43px] sm:max-w-[823px]"
       />
     </div>
 
     <div class="order-2 shrink-0">
       <UserActions />
     </div>
+    <hr class="order-4 w-full sm:hidden" />
   </header>
 </template>
 <script setup lang="ts">
@@ -93,7 +94,4 @@ const toggleMenu = () => {
     document.body.style.overflow = isOpen.value ? "hidden" : "";
   }
 };
-// const toggleMenuSignInRegister = () => {
-//   isOpen.value = !isOpen.value;
-// };
 </script>
